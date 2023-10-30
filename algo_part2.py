@@ -5,7 +5,7 @@ from scipy import spatial
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 try:
-    connection = pymysql.connect(host='database-1.cpgnivwu2wnj.us-east-1.rds.amazonaws.com',user='admin',password='VANSH9989',db='truss',autocommit=True)
+    connection = pymysql.connect(host='localhost',user='root',password='root',db='sra',autocommit=True)
     print("database connected")
 except Exception as e:
     print("database failed to connect")
