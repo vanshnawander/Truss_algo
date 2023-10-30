@@ -1,7 +1,7 @@
 import pandas as pd
 import pymysql
 try:
-    connection = pymysql.connect(host='database-1.cpgnivwu2wnj.us-east-1.rds.amazonaws.com',user='root',password='vanshr123@&',db='sra',autocommit=True)
+    connection = pymysql.connect(host='localhost',user='root',password='vanshr123@&',db='sra',autocommit=True)
     print("database connected")
 except Exception as e:
     print("database failed to connect")
