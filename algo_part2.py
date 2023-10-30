@@ -5,7 +5,7 @@ from scipy import spatial
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 try:
-    connection = pymysql.connect(host='localhost',user='root',password='root',db='sra',autocommit=True)
+    connection = pymysql.connect(host='database-1.cpgnivwu2wnj.us-east-1.rds.amazonaws.com',user='admin',password='VANSH9989',db='truss',autocommit=True)
     print("database connected")
 except Exception as e:
     print("database failed to connect")
@@ -35,7 +35,7 @@ def mlalgo(email):
     ans=pd.DataFrame()
     ans["email"] = df["email"]
     ans["tags"]=df["gender"]+" "+ df["residence"] +" "+ df["focused industry"]+" "+ df["skill_1"].apply(convert)+ " "+df["skill_2"].apply(convert)+" "+df["skill_3"].apply(convert)
-    ans["skills_required"]=df["skills_required"].apply(func) +" "+ df["residence"]+" "+df["gender"]+" " + df["User_interaction"].apply(func)
+    ans["skills_required"]=df["skills_required"].apply(func) +" "+ df["residence"]+" "+df["gender"]+" " + df["user_interaction"].apply(func)
     ans.fillna("",inplace=True)
     corpus=list(ans['tags'])
     vectorizer = CountVectorizer(tokenizer=spacy_tokenizer, lowercase=False, binary=True)
