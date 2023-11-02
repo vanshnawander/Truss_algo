@@ -19,7 +19,7 @@ except Exception as e:
 application = app
 #app.config["SESSION_PERMANENT"] = False
 app.debug = True
-app.config['SECRET_KEY'] = 'secret'
+app.config['SECRET_KEY'] = 'secret'	
 app.config['SESSION_TYPE'] = 'filesystem'
 
 Session(app)
@@ -64,7 +64,21 @@ def dashboard():
 	print(session['email'])
 	return render_template('finder.html', data=users,data2=data2)
 
+@app.route('/profile', methods=["POST", "GET"])
+def profile():
+	profileData=request.form['result']
+	print(profileData)
+	data=cursor.execute(f"select * from truss_data where email='{profileData}'")
+	return render_template('otherProfile.html')
 
+@app.route('/profile1', methods=["POST", "GET"])
+def profile1():
+	profileData=request.form['result1']
+	print(profileData)
+	data=cursor.execute(f"select * from truss_data where email='{profileData}'")
+	data=cursor.fetchone()
+	print(data)
+	return render_template('otherProfile.html',data=data)
 
 #Sign Up Page
 @app.route('/signup1')
@@ -200,9 +214,7 @@ def ud():
 	return render_template('ud.html')
 
 #other peoples profile
-@app.route('/profile')
-def profile():
-	return render_template('otherProfile.html')
+
 
 
 #Finder Page

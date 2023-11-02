@@ -1088,7 +1088,10 @@ button:focus{
                                         <div class='card-body'>
                                           <h5 class='card-title'>{{user['name']}}</h5>
                                           <p class='card-text'>{{user['skill_1'][:15]+".."}}<br>{{user['skill_2'][:15]+".."}}</p>
-                                          <a href='/profile' class='btn' style='color: black;'>Connect</a>
+                                          <form action="/profile1" method="post">
+                                            <input type="email" name="result1" id="result1" value="{{user['email']}}" hidden>
+                                            <input type="submit" class='btn' style='color: black;' value="Connect">
+                                          </form>
                                         </div>
                                       </div>
                                       </center>
@@ -1103,7 +1106,11 @@ button:focus{
                                         <div class='card-body'>
                                           <h5 class='card-title'>{{user[2]}}</h5>
                                           <p class='card-text'>{{user[9][:15]+".."}}<br>{{user[11][:15]+".."}}</p>
-                                          <a href='/profile' class='btn' style='color: black;'>Connect</a>
+                                          <form action="/profile" method="post">
+                                            <input type="email" name="result" id="result" value="{{user[1]}}" hidden>
+                                            <input type="submit" class='btn' style='color: black;' value="Connect">
+                                          </form>
+            
                                         </div>
                                       </div>
                                       </center>
