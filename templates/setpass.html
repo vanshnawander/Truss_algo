@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+        crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password</title>
+    <style>
+        .gradient-custom {
+            /* fallback for old browsers */
+            background: #3BB4FD;
+    
+            /* Chrome 10-25, Safari 5.1-6 */
+            background: -webkit-linear-gradient(to right, #3BB4FD, #4581FF);
+    
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            background: linear-gradient(to bottom right, #3BB4FD, #4581FF)
+        }
+    
+        .card-registration .select-input.form-control[readonly]:not([disabled]) {
+            font-size: 1rem;
+            line-height: 2.15;
+            padding-left: .75em;
+            padding-right: .75em;
+        }
+    
+        .card-registration .select-arrow {
+            top: 13px;
+        }
+
+        span{
+            color: red;
+        }
+    </style>
+    </head>
+<body>
+    <img src="static/truss_logo.png" width="15%" style="float: left; position: absolute;">
+    <section class="vh-100 gradient-custom">
+        <div class="container py-5 h-100">
+            <div class="row justify-content-center align-items-center h-100">
+                <div class="col-12 col-lg-9 col-xl-7">
+                    <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+                        <div class="card-body p-4 p-md-5" style="height:60%">
+                            <h3 class="mb-md-4 pb-2 pb-md-0">Set Password</h3>
+                            <h6 class="mb-md-5 heading---hero emoji">P.S. not your birthday</h6>
+                            <form action="php/signup.php" method="POST" onsubmit="return validateForm()">
+                                <div class="form-outline mb-4">
+                                    <label class="form-label" for="pass">Enter Password</label>
+                                    <input type="password" id="pass" name="pass" class="form-control form-control-lg" />
+                                </div>
+                                <div class="form-outline mb-3">
+                                    <label class="form-label" for="pass2">Confirm Password <span id="passwordMismatch" style="color: red;"></span></label>
+                                    <input type="password" id="pass2" name="pass2" class="form-control form-control-lg" />
+                                </div>
+                                <div class="mt-2 pt-2 py-2">
+                                    <input class="form-check-input" style="visibility: hidden;" type="radio" name="submitter" value="signup2" checked />
+                                    <input class="btn btn-primary btn-lg" style="background-color: #fede03; color: black; border:none; width: 100%;" type="submit" value="Submit" />
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+        function validateForm() {
+            var password1 = document.getElementById("pass").value;
+            var password2 = document.getElementById("pass2").value;
+            var passwordMismatch = document.getElementById("passwordMismatch");
+
+            if (password1 !== password2) {
+                passwordMismatch.textContent = "Passwords do not match";
+                return false;
+            } else {
+                passwordMismatch.textContent = "";
+                return true;
+            }
+        }
+    </script>
+</body>
+
+</html>

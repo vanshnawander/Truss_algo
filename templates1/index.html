@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#button').on('click',function() {
+            var selectedOption = $('#useremail').val();
+            $.ajax({
+                type: 'GET',
+                url: '/get_dynamic_data/' + selectedOption,
+                success: function(response) {
+                    displayUserList(response);
+
+                },
+                error: function(xhr, textStatus, errorThrown) {
+                    console.error('Error:', errorThrown);
+                }
+            });
+
+        });
+        function displayUserList(users) {
+                var userListElement = $('#user-list');
+                users.forEach(function(user) {
+                    var userLink = $('<a>', {
+                        text: user.email,
+                        href: $('#useremail').val()+"/"+user.email,
+                        click: function() {
+                            displayUserDetails(user);
+                        }
+                    });
+                    userListElement.append($('<li>').append(userLink));
+                });
+            }
+
+            function displayUserDetails(user) {
+                var userDetailsElement = $('#user-details');
+                userDetailsElement.empty();
+                userDetailsElement.append($('<h2>', {text: user.name}));
+                userDetailsElement.append($('<p>', {text: 'Age: ' + user.Age}));
+                    userDetailsElement.append($('<p>', {text: 'skills: ' + user.skill_1 +", " + user.skill_2 + ", " + user.skill_3}));
+                userDetailsElement.append($('<p>', {text: 'Email: ' + user.email}));
+            }
+    });
+</script>
+
+
+<body>
+
+    <datalist id="users">
+        {% for option in users %}
+    <option value="{{ option }}">
+        {% endfor %}
+      </datalist>
+    <br>
+    <br><br><br>
+    <center>
+        <input list="users" id="useremail" placeholder="enter user email" >
+    </center>
+    <button id="button">enter</button>
+    <br><br><br><br><br>
+    <h1>Recommended people</h1>
+    <ul id="user-list">
+       
+    </ul>
+    <div id="user-details">
+    </div>
+</body>
+</html>

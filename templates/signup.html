@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+        crossorigin="anonymous"></script>
+    <link rel='stylesheet' href='https://unicons.iconscout.com/release/v2.1.9/css/unicons.css'>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <style>
+        .gradient-custom {
+            /* fallback for old browsers */
+            background: #3BB4FD;
+
+            /* Chrome 10-25, Safari 5.1-6 */
+            background: -webkit-linear-gradient(to right, #3BB4FD, #4581FF);
+
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            background: linear-gradient(to bottom right, #3BB4FD, #4581FF)
+        }
+
+        .card-registration .select-input.form-control[readonly]:not([disabled]) {
+            font-size: 1rem;
+            line-height: 2.15;
+            padding-left: .75em;
+            padding-right: .75em;
+        }
+
+        .card-registration .select-arrow {
+            top: 13px;
+        }
+    </style>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <meta name="google-signin-client_id" content="YOUR_CLIENT_ID.apps.googleusercontent.com">
+</head>
+
+<body>
+    <img src="static/truss_logo.png" width="15%" style="float: left; position: absolute;">
+    <section class="vh-100 gradient-custom">
+
+        <div class="container py-3 h-100">
+            <div class="row justify-content-center align-items-center h-100">
+        
+                    <div class="col-12 col-lg-9 col-xl-7">
+                    
+                    <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+                        <div class="card-body p-4 p-md-5">
+                            <center><h3 class="mb-3 pb-2 pb-md-0 ">Sign Up</h3></center>
+                                <center><h5 class="mb-4">Tell us about yourself</h5> </center>
+                            <form action = "php/signup.php" method = "POST">
+                                
+                                <div class="row">
+                                    <div class="col-md-6 mb-4">
+
+                                        <div class="form-outline">
+                                            <input type="text" id="firstName" name="firstName" class="form-control form-control-lg" />
+                                            <label class="form-label" for="firstName">First Name</label>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-6 mb-4">
+
+                                        <div class="form-outline">
+                                            <input type="text" id="lastName" name="lastName" class="form-control form-control-lg" />
+                                        
+                                            <label class="form-label" for="lastName">Last Name</label>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="row">
+
+
+                                    <div class="col-md-6 mb-4">
+
+                                        <div class="form-outline">
+                                            <input type="email" id="emailAddress" name="emailAddress"
+                                                class="form-control form-control-lg" />
+                                            <label class="form-label" for="emailAddress">Email</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-4 d-flex align-items-center">
+                                        <div class="form-outline">
+                                            <input type="tel" id="phoneNumber" name="phoneNumber" class="form-control form-control-lg" />
+                                            <label class="form-label" for="phoneNumber">Phone Number</label>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6 mb-4 pb-2">
+                                        <div class="form-outline datepicker w-100">
+                                            <input type="date" class="form-control form-control" id="birthdayDate" name="birthdayDate" />
+                                            <label for="birthdayDate" class="form-label">Date of Birth</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-4 pb-2">
+
+
+
+                                         <h6 class="mb-2 pb-1">Gender: </h6>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="inlineRadioOptions"
+                                                id="maleGender" value="male" checked/>
+                                            <label class="form-check-label" for="maleGender">Male</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="inlineRadioOptions"
+                                                id="femaleGender" value="female" />
+                                            <label class="form-check-label" for="femaleGender">Female</label>
+                                        </div>
+
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="inlineRadioOptions"
+                                                id="otherGender" value="other" />
+                                            <label class="form-check-label" for="otherGender">Other</label>
+                                        </div>
+                                       
+                                    </div>
+                                    
+                                </div>
+                                <div class="container">
+                                    <a href="" class=""></a>
+                                </div>
+                                <div class="pt-2 text-center">
+                                    
+                                    
+                                    <input class="form-check-input" type="radio" name="submitter" value="signup1" style="visibility:hidden;" checked/>
+                                    
+                                    <input class="btn btn-primary btn-lg"
+                                        style="background-color: #fede03 ; color: black; border:none;width:100% ;"
+                                        type="submit" value="Submit" />
+                                
+                                </div>
+                                <br>
+                                <center><a href="/"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-left"><polyline points="15 18 9 12 15 6"></polyline></svg> Back to login</a></center>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>

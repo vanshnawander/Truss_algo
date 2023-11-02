@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+        crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.1/font/bootstrap-icons.css" />
+
+    <!-- Style -->
+    <title>Document</title>
+    <style>
+        .gradient-custom {
+            /* fallback for old browsers */
+            background: #3BB4FD;
+
+            /* Chrome 10-25, Safari 5.1-6 */
+            background: -webkit-linear-gradient(to right, #3BB4FD, #4581FF);
+
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            background: linear-gradient(to bottom right, #3BB4FD, #4581FF)
+        }
+
+        .flip-card {
+            background-color: transparent;
+            width: 25vw;
+            height: 25vw;
+            perspective: 1000px;
+        }
+
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+
+        .flip-card:hover .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-front,
+        .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 3rem;
+        }
+
+        .flip-card-front {
+            background-image: linear-gradient(45deg, #fec269 , #fff555);
+        }
+
+        .flip-card-front img {
+            width: 220px;
+            margin-top: 1rem;
+        }
+
+        .flip-card-back {
+            background-image: linear-gradient(315deg,  #fec269 , #fff555);
+            color:black;
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-back img {
+            width: 140px;
+            margin-top: 1rem;
+        }
+
+        .flip-card-back h3 {
+            margin-bottom: 0.3rem;
+        }
+
+        .flip-card-back h1 {
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <img src="static/truss_logo.png" width="10%" style="float: left; position:fixed;">
+
+    <section class="vh-100 gradient-custom text-center">
+        <div class="container text-center text-light py-4">
+            <h1 class="mb-4 py-4">Which one are You ?</h1>
+        
+        <div class="row">
+            <div class="col">
+                <div class="container text-center flip-card">
+                    <div class="flip-card-inner ">
+                        <div class="flip-card-front">
+                            <img src="static/undraw_team_spirit_re_yl1v.svg" />
+                        </div>
+                        <div class="flip-card-back py-4">
+                            
+                            <h2>Founder</h2>
+                                <img src="static/undraw_stand_out_-1-oag.svg" alt="Stand Out Image" style="height:40% ;">
+                                <br><br>
+                                <p>-Have an idea for a startup</p>
+                                <p>-Wants a partner with a complimentary skillset to turn<br> ideas to reality</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="container text-center flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front ">
+                            <img src="static/undraw_team_spirit_re_yl1v.svg" />
+                        </div>
+                        <div class="flip-card-back py-4">
+                            <h2>Co-Founder</h2>
+                            <img src="static/undraw_team_spirit_re_yl1v.svg" alt="Stand Out Image" style="height:40% ;">
+                            <br><br>
+                            <p>-Don't have an established idea</p>
+                        
+                            <p>-Have Skills,Interests and Time to devote for an existing start up idea</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    </section>
+
+</body>
+
+</html>

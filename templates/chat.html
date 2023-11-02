@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <script src="https://kit.fontawesome.com/f3c6bd096b.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+        <script type="text/javascript" src="//code.jquery.com/jquery-1.4.2.min.js"></script>
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.3/socket.io.min.js"></script>
+        
+        <script type="text/javascript" charset="utf-8">
+            // var socket;
+            // $(document).ready(function(){
+            //     socket = io.connect('http://127.0.0.1:5000/chat');
+            //     socket.on('connect', function() {
+            //         socket.emit('join', {});
+            //     });
+            //     socket.on('status', function(data) {
+            //         $('#chat').val($('#chat').val() + '<' + data.msg + '>\n');
+            //         $('#chat').scrollTop($('#chat')[0].scrollHeight);
+            //     });
+            //     socket.on('message', function(data) {
+            //         $('#chat').val($('#chat').val() + data.msg + '\n');
+            //         $('#chat').scrollTop($('#chat')[0].scrollHeight);
+            //     });
+            //     $('#send').click(function(e) {
+            //             text = $('#text').val();
+            //             $('#text').val('');
+            //             socket.emit('text', {msg: text});
+            //     });
+            // });
+            // function leave_room() {
+            //     socket.emit('left', {}, function() {
+            //         socket.disconnect();
+            //         // go back to the login page
+            //         window.location.href = "{{ url_for('finder') }}";
+            //     });
+            // }
+        </script>
+        
+        <style>
+            * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;
+  }
+
+/* Common styling */
+
+.display_none{
+  display: none;
+}
+
+input {
+    border-top-style: hidden;
+    border-right-style: hidden;
+    border-left-style: hidden;
+    border-bottom-style: groove;
+    background-color: #eee;
+    outline: none;
+}
+
+button {
+  border: none;
+}
+
+button:focus {
+  border: none;
+  outline: none;
+}
+
+button:focus{
+  outline:none !important;
+}
+
+
+.no-outline:focus {
+    outline: none;
+  }
+
+  small {
+    color: grey;
+  }
+
+  ::placeholder {
+    font-size: 15px;
+    font-weight: bold;
+  }
+
+  h4, small ,h2{
+    margin: 0;
+    display: inline;
+    text-align: justify;
+    cursor: pointer;
+  }
+
+  p {
+    color: black;
+    padding: 10px;
+  }
+
+
+/* main style */
+.main{
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    background-color:rgb(255, 255, 255) ;
+    overflow: hidden;
+}
+
+@media  screen and (max-width: 1024px) {
+  body{font-size: 20px;}  
+}
+
+/* ######################################################################### */
+
+.header-middle small {
+  display: block;
+}
+/* ######################################################################### */
+
+
+/*EOF main style */
+/* <------------------------------------------------------------------------------------------------> */
+/* main-left style  */
+
+
+@media screen and (max-width: 1024px) {
+  .main-left{
+    width: 100vw;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    padding: 0;
+    background-color: rgb(168, 168, 168);
+    
+  }
+}
+
+  @media screen and (min-width: 1024px) {
+    .main-left{
+        width: 35%;
+        /* background-color: #ffffff;
+        display: flex;
+        flex-direction: column; */
+        height: 94vh;
+        border-radius: 10px;
+      }
+    
+   
+  }
+
+/* header-left style  */
+.header-left {
+    width: 100%;
+    float: left;
+    background-color: rgb(255, 255, 255);
+    position: relative;
+    border: none;
+    padding: 1.4em 1em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgb(88, 88, 88);
+    border-radius: 10px 10px 0 0;
+  }
+
+  .header-left div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+.left-nav-item-2-1{
+  padding: 0.5rem 1rem;
+  border-radius: 30px;
+  font-size: 1.5rem;
+  margin: 2px;
+  background-color: rgb(223, 223, 223);
+  color: rgb(73, 83, 80);
+  border: 0;
+  font-weight: bolder;
+  border: none;
+}
+.left-nav-item-2-2{
+  padding: 0;
+  margin: 2px;
+  border: none;
+  border-radius:10px ;
+}
+
+.dots{
+  display: flex;
+  padding: 5px;
+  flex-direction: column;
+  background-color:rgb(255, 255, 255);
+}
+.dot {
+  height: 0.5rem;
+  width: 0.5rem;
+  margin: 0.75px;
+  background-color:rgb(166, 166, 166);
+  border-radius: 50%;
+  display: inline-block;
+}
+
+@media screen and (max-width: 1024px) {
+  .header-left{
+    font-size: 2rem;
+    /* background-color: aqua; */
+  }
+  .header-left h2{
+    font-size: 6rem;
+    font-weight: bolder;
+    /* background-color: aqua; */
+  }
+
+  .left-nav-item-2-1{
+    padding: 1rem 3rem;
+    font-size: 5rem;
+    margin: 0.5rem 3rem;
+  }
+
+  .left-nav-item-2-2{
+    padding: 1px;
+    margin: 2px;
+    border: none;
+    border-radius:10px ;
+  }
+}
+/*EOF header-left style  */
+
+/* left-profile style */
+.details{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* background-color: aqua; */
+}
+.left-profile{
+  width: 100%;
+  background-color: rgb(255, 255, 255);
+  padding: 1rem 1rem;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.left-profile-top{
+  display: flex;
+}
+
+.dp-username{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+/* .name */
+
+.dp{
+  border-radius: 50%;
+  width: 7rem;
+  height: 7rem;
+  /* margin-bottom: 1rem; */
+}
+
+.username{
+  margin-top: 1.5rem;
+  font-size: large;
+  font-weight: bolder;
+}
+
+ 
+.search-bar{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5px;
+  width: 80%;
+}
+
+
+.search-bar input {
+  width: 110%;
+  height: 30px;
+  /* float: right; */
+  border: none;
+  /* margin-left: 10px;
+  margin-bottom: 7px; */
+  padding: 2rem 1rem;
+  font-weight: bolder;
+  font-size: 1.6rem;
+  color: rgb(95, 93, 93);
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;
+  border-radius: 10px 0 0 10px;
+}
+
+.search-bar i{
+  background-color: rgb(238, 238, 238);
+  padding: 1rem;
+  font-size: 2rem;
+  color: #696869;
+  border-radius: 0 10px 10px 0;
+}
+
+@media screen and (max-width: 1024px){
+  .left-profile{
+    height: 20vh;
+    /* background-color: #ff00ff; */
+    background-image: url(static/profile_bg.jpg);
+    font-size: 3rem;
+  }
+
+  .left-profile-top{
+    display: flex;
+  }
+
+  .dp{
+    width: 16rem;
+    height: 16rem;
+  }
+
+  .username{
+    margin-top: 1.5rem;
+    font-size: 4rem;
+    font-weight: bolder;
+  }
+  
+  .dp-username{
+    display: flex;
+    margin-top: 2rem;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .dots{
+    font-size: 3rem;
+    height: 8rem;
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .dot{
+    height: 1.5rem;
+    width: 1.5rem;
+    margin: 4px;
+  }
+
+   
+.search-bar{
+  margin-top: 1rem;
+  width: 80%;
+  font-size: 3rem;
+}
+
+.search-bar input {
+  width: 100%;
+  height: 100%;
+  border: none;
+  padding: 2rem 2rem;
+  font-weight: bolder;
+  font-size: 3rem;
+  color: rgb(95, 93, 93);
+  border-radius: 10px 0 0 10px;
+}
+.search-bar input::placeholder{
+  font-size: 3rem;
+  font-weight: bolder;
+}
+
+.search-bar i{
+  background-color: rgb(238, 238, 238);
+  padding: 2rem;
+  font-size: 4rem;
+  border-radius: 0 10px 10px 0;
+}
+}
+
+/*EOF left-profile style */
+
+/* container-left style  */
+
+.parent-container-left{
+  height: 100vh;
+  background-color: #eee;
+}
+
+.container-left {
+  width: 100%;
+  position: relative;
+  float: left;
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  padding: 0 2rem;
+  border-radius: 10px 10px 0 0 ;
+  /* margin-bottom: 1.5rem; */
+  background-color: rgb(222, 222, 222);
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.open-height{
+  height: 65vh;
+  /* background-color: aquamarine; */
+}
+
+.container-left::-webkit-scrollbar{
+  width: 1px;
+}
+
+.container-left::-webkit-scrollbar {
+  width: 1px    ;         /* width of the entire scrollbar */
+}
+
+.container-left::-webkit-scrollbar-track {
+  color: transparent;     /* color of the tracking area */
+}
+
+.container-left::-webkit-scrollbar-thumb {
+  background-color: rgb(255, 255, 255);    /* color of the scroll thumb */
+  border-radius: 20px;	/* roundness of the scroll thumb */
+  border: rgb(255, 255, 255);  /* creates padding around scroll thumb */
+}
+
+
+
+.container-left .chat-list small {
+  float: right;
+}
+/*EOF container-left style  */
+
+/* chat-list style */
+
+
+.chat-list {
+  margin-top: 10px;
+  /* background-color: rgb(255, 255, 255); */
+  padding: 2px;
+}
+
+@media screen and (max-width: 1024px) {
+  .chat-list{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: stretch;
+  }  
+}
+
+/*EOF chat-list style */
+
+/* .contact */
+
+.contact {
+  display: flex;
+  position: relative;
+  height: 8rem;
+  width: 100%;
+  padding:10px 10px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  margin: 0.3rem;
+  /* justify-content: space-between; */
+  border-bottom: 0.5px solid rgba(0,0,0, 0.4);
+}
+
+@media screen and (max-width: 1024px){
+  .contact{
+    height:20rem;
+  }
+}
+
+.inner-contact-1{
+  width: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  /* background-color: rgb(255, 0, 0); */
+}
+.name{
+  padding: 0.4rem;
+  width: 77%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* background-color: rgb(255, 255, 255); */
+}
+.inner-name-1{
+  display: flex;
+  justify-content: space-between;
+}
+
+.inner-name-2{
+  display: flex;
+  justify-content: left;
+  /* background-color: aqua; */
+
+}
+.inner-contact-1 img{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+
+
+/* .active */
+.contact.active {
+  background-color: rgba(0, 0, 0, 0.1)
+}
+
+
+/* .firstname */
+.firstname{
+  font-weight: bolder;
+}
+
+/* .sentence */
+.sentence {
+  display: block;
+  text-align: justify;
+  overflow: hidden;
+}
+
+/* .message_time */
+@media screen and (max-width: 1024px) {
+  .inner-contact-1 img{
+    width: 15rem;
+    height: 15rem;
+  }  
+  .inner-name-1{
+    font-size: 4rem;
+    margin-bottom: 10px;
+  }
+  .inner-name-1 h4{
+    font-size: 5rem;
+  }
+  .inner-name-2 {
+    font-size: 3rem;
+  }
+  
+}
+
+/*EOF main-left style  */
+/* <------------------------------------------------------------------------------------------------> */
+/* main-middle style  */
+
+@media screen and (max-width: 1024px) {
+.main-middle{
+  background-color: #3BB4FD;
+  background-image: linear-gradient(to right,#4581FF,#3BB4FD);
+  flex-direction: column;
+  height: 100%;
+  display: none;
+}
+}
+
+@media screen and (min-width: 1024px) {
+    .main-middle{
+      width: 100%;
+      background-color: #3BB4FD;
+      background-image: linear-gradient(to right,#4581FF,#3BB4FD);
+      display: flex;
+      flex-direction: column;
+      border-left: 1px solid grey;
+      /* height: 99.9vh; */
+      
+    }
+}
+
+/* header-middle style  */
+
+.header-middle {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  /* padding: 3.8rem 1rem; */
+  border: none;
+  /* overflow: hidden; */
+  border-bottom: 1px solid grey;
+  background-color: #ffffff;
+}
+
+@media screen and (min-width: 1024px){
+  .header-middle{
+    width: 100%;
+    display: flex;
+    /* height: 70px; */
+    border: none;
+    justify-content: space-between;
+    /* overflow: hidden; */
+    padding: 0.5rem 0 1rem 2rem;
+    background-color: #ffffff;
+    border-bottom: 1px solid grey;
+  }
+}
+
+.header-middle-img{
+  display: flex;
+  /* background-color: #ff00ff; */
+}
+
+.header-middle img {
+  cursor: pointer;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+
+.header-middle small {
+  display: block;
+}
+
+.header-title{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 25%;
+}
+/*EOF header-middle style  */
+
+/* .icons_right */
+
+.icons_right{
+  padding-right: 2rem;
+  display:flex ;
+  justify-content: center;
+  align-items: center;
+}
+
+.icons_left i, .icons_right i, .search_bar i {
+  font-size: 20px;
+  margin-left: 20px;
+  margin-right: 10px;
+  cursor: pointer;
+  color: grey;
+}
+
+/* container-middle style */
+.container-middle {
+  width: 100%;
+  /* height: vh; */
+  /* background-image: url("https://backgrounddownload.com/wp-content/uploads/2018/09/whatsapp-chat-background-image.jpg"); */
+  /* background-size: cover; */
+  float:left;
+  background-color: #3BB4FD;
+  background-image: linear-gradient(to right,#4581FF,#3BB4FD);
+  position: relative;
+  height: 79%;
+}
+
+.message_container{
+  height: 92%; 
+  padding: 5%;
+  font-size: 2rem;
+  color: black;
+}
+
+
+.message_box {
+  height: 100%;
+  position: relative;
+  overflow-y: scroll;
+  padding: 0 50px;
+  display: none;
+}
+.message_box::after {
+  display: table;
+  content: " ";
+  clear: both;
+}
+
+
+.message_box::-webkit-scrollbar {
+  width: 1px    ;         /* width of the entire scrollbar */
+}
+
+.message_box::-webkit-scrollbar-track {
+  color: transparent;     /* color of the tracking area */
+}
+
+.message_box::-webkit-scrollbar-thumb {
+  background-color: rgb(2, 125, 240);    /* color of the scroll thumb */
+  border-radius: 20px;	/* roundness of the scroll thumb */
+  border: rgb(235, 194, 120);  /* creates padding around scroll thumb */
+}
+
+
+.message_box.active, .message .message_options.active {
+  display: block;
+}
+.message {
+  width: 100%;
+  position: relative;
+}
+
+.message h6 {
+  float: right;
+  margin-right: 1rem;
+  color: grey;
+  display: inline;
+}
+.message p {
+  color: black;
+  font-size: 1em;
+}
+.message i {
+  display: none;
+  color: grey;
+  float: right;
+  cursor: pointer;
+  z-index: 2;
+  position: absolute;
+  top: 80%;
+  right: 5rem;
+  transform: translate(-50%);
+}
+.message:hover i {
+  display: block;
+}
+
+
+.white {
+  background-color: white;
+  border-radius: 10px;
+  max-width: 45%;
+  float: left;
+  clear: both;
+  margin-bottom: 15px;
+  margin-top: 10px;
+}
+.grey {
+  background-color: rgb(162, 162, 162);
+  border-radius: 10px;
+  max-width: 45%;
+  float: right;
+  clear: both;
+  margin-bottom: 15px;
+}
+
+
+.type_message input {
+  background-color: #fede03;
+  font-size: 1rem;
+  padding: 6px;
+  width: 50vw;
+  height: 20%;
+  border: none;
+  font-size: 20px;
+  /* background-color: aqua; */
+}
+
+.type_message{
+  width: 96%;
+  margin: 0 auto ;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #fede03;
+}
+
+.type-message-container{
+  position: relative;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 15vh;
+  /* border-radius: 0 0 10px 10px; */
+  /* background-color: rgb(157, 53, 53); */
+}
+
+
+.type_message i {
+  font-size: 20px;
+  margin: 0 10px;
+  cursor: pointer;
+}
+.template {
+  display: none;
+}
+.message_dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.template .message_options, .message .message_options {
+  display: none;
+  background-color: white;
+  position: absolute;
+  left: 270px;
+  top: 20px;
+  min-width: 100px;
+  z-index: 1;
+}
+
+/* You can add down message_info if needed */
+.message_delete {
+  color: black;
+  padding: 1rem 1rem;
+  display: block;
+  text-align: center;
+  cursor: pointer;
+}
+/*EOF container-middle style */
+
+/*EOF main-middle style  */
+/* <------------------------------------------------------------------------------------------------> */
+        </style>
+        <title>Truss | Chat</title>
+    </head>
+    <body>
+        <div class="main">
+          
+            <div class="main-left">
+                <div class="header-left">
+                  <div>
+                    <h2>TRUSS</h2>
+                  </div>
+                  <div>
+                    <!-- Add collapse feature to left-profile -->
+                    <button class="btn left-nav-item-2-1" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                      +
+                    </button>
+                    
+                    <!-- add displayMainRight function -->
+                    <button class="left-nav-item-2-2" onclick="displayMainRight()">
+                      <div class="dots">
+                          <span class="dot"></span>
+                          <span class="dot"></span>
+                          <span class="dot"></span>
+                        </div>
+                    </button>
+                  </div>
+                </div>
+                <div class="collapse" id="collapseExample">
+                  <div class="card card-body">
+                    <div class="left-profile" id="left-profile">
+                      <div class="left-profile-top">
+                        <div class="dp-username">
+                          <div>
+                            <img src="static/mukund.jpeg" alt="image" class="dp">
+                        </div>
+                        <div class="details">  
+                          <span class="username">Mukund Vishwanath</span>
+                          <span class="desc">CEO, TRUSS</span>
+                        </div>
+                      </div>
+                      <!-- <div class="gear">
+                        <a href="#"><i class="fa-solid fa-gear"></i></a>
+                      </div> -->
+                    </div>
+                    <div class="search-bar" >
+                      <input class="searchme" type="text" placeholder="Search chats">
+                      <i class="fa fa-search" ></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+                <div class="parent-container-left">
+                  <!-- start of container_left -->
+                  <div class="container-left">
+                    
+                    <div class="chat-list">
+                      
+                      <div class="contact" data-chat="0">
+                        <div class="inner-contact-1">
+                          <img src="static/mukund.jpeg" alt="openchat">
+                        </div>
+                        <div class="name">
+                          <div class="inner-name-1">
+                            <h4 class="firstname">Mukund</h4>
+                            <small class="message_time">06:35</small>
+                          </div>
+                          <div class="inner-name-2">
+                            <small class="sentence">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dicta, reiciendis!</small>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      
+                      <div class="contact" data-chat="1">
+                        <div class="inner-contact-1">
+                          <img src="static/rohith.jpeg" alt="openchat">
+                        </div>
+                        <div class="name">
+                          <div class="inner-name-1">
+                            <h4 class="firstname">Rohith</h4>
+                            <small class="message_time">06:35</small>
+                          </div>
+                          <div class="inner-name-2">
+                            <small class="sentence">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dicta, reiciendis!</small>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      
+                      <div class="contact" data-chat="2">
+                        <div class="inner-contact-1">
+                          <img src="static/prasanna.jpeg" alt="openchat">
+                        </div>
+                        <div class="name">
+                          <div class="inner-name-1">
+                            <h4 class="firstname">Prasanna</h4>
+                            <small class="message_time">06:35</small>
+                          </div>
+                          <div class="inner-name-2">
+                            <small class="sentence">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dicta, reiciendis!</small>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      
+                      <div class="contact" data-chat="3">
+                        <div class="inner-contact-1">
+                          <img src="static/jayesh.jpeg" alt="openchat">
+                        </div>
+                        <div class="name">
+                          <div class="inner-name-1">
+                            <h4 class="firstname">Jayesh Dhoot</h4>
+                            <small class="message_time">06:35</small>
+                          </div>
+                          <div class="inner-name-2">
+                            <small class="sentence">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dicta, reiciendis!</small>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      
+                      <div class="contact" data-chat="4">
+                        <div class="inner-contact-1">
+                          <img src="static/sathvik.jpeg" alt="openchat">
+                        </div>
+                        <div class="name">
+                          <div class="inner-name-1">
+                            <h4 class="firstname">Sathvik</h4>
+                            <small class="message_time">06:35</small>
+                          </div>
+                          <div class="inner-name-2">
+                            <small class="sentence">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dicta, reiciendis!</small>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      
+                      <div class="contact" data-chat="5">
+                        <div class="inner-contact-1">
+                          <img src="static/dhoni.jpeg" alt="openchat">
+                        </div>
+                        <div class="name">
+                          <div class="inner-name-1">
+                            <h4 class="firstname">Bhargavi</h4>
+                            <small class="message_time">06:35</small>
+                          </div>
+                          <div class="inner-name-2">
+                            <small class="sentence">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dicta, reiciendis!</small>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      
+                      <div class="contact" data-chat="6">
+                        <div class="inner-contact-1">
+                          <img src="static/ratanTata.jpeg" alt="openchat">
+                        </div>
+                        <div class="name">
+                          <div class="inner-name-1">
+                            <h4 class="firstname">Snigdha</h4>
+                            <small class="message_time">06:35</small>
+                          </div>
+                          <div class="inner-name-2">
+                            <small class="sentence">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dicta, reiciendis!</small>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      
+                      <div class="contact" data-chat="7">
+                        <div class="inner-contact-1">
+                          <img src="static/abdulKalam.jpeg" alt="openchat">
+                        </div>
+                        <div class="name">
+                          <div class="inner-name-1">
+                            <h4 class="firstname">Satvik</h4>
+                            <small class="message_time">06:35</small>
+                          </div>
+                          <div class="inner-name-2">
+                            <small class="sentence">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dicta, reiciendis!</small>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- end of chat_list -->
+                </div>
+                <!-- start of container_left -->                
+              </div>
+              </div>
+            <!-- end of main-left -->
+            
+
+            <div class="main-middle">
+
+                <div class="header-middle">
+                  <div class="header-title">
+                    <div class="header-middle-img">
+                      <img src="static/mukund.jpeg" alt="openchat">
+                    </div>
+                    <div class="name">
+                      <h4 class="firstname margin-top-1">Mukund</h4>
+                      <small>Last seen today at <span class="message_time">18:30</span></small>
+                    </div>
+                  </div>
+                  <div class="icons_right">
+                    <i class="fas fa-search"></i>
+                    <i class="fas fa-paperclip"></i>
+                    <i class="fas fa-ellipsis-v"></i>
+                  </div>
+                </div>
+
+                <div class="container-middle">
+                    <button type="button" style="position: fixed; margin: 5px;" class="btn btn" onclick=leave_room()>Go back</button>
+                    <!-- message_container -->
+                    <div class="message_container">
+                        <textarea id="chat" cols="70" rows="10" placeholder="No messages yet. Start one..."></textarea>
+                    </div>
+                    <!-- end of message_container -->
+                    <div class="type-message-container">
+                      <!-- type_message -->
+                      <div class="type_message">
+                          <div>
+                            <i class="fas fa-smile"></i>
+                            <input class="type_here" type="text" id="text" placeholder="Type your message">
+                          </div>
+                          <div>
+                            <!-- <i class="fas fa-paper-plane"></i>
+                            <i class="fas fa-microphone"></i> -->
+                            <button type="button" id="send" class="btn btn-success">SEND</button>
+                          </div>
+                      </div>
+                      <!-- end of type_message -->
+                    </div>
+                </div>
+
+                <div class="template">
+                    <div class="message grey">
+                      <p class="content">Something new</p>
+                      <h6 class="message_time">5:55</h6>
+                      <i class="fas fa-chevron-down"></i>
+                      <div class="message_dropdown">
+                        <div class="message_options">
+                          <div class="message_info">Info</div>
+                          <div class="message_delete">Delete</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+            </div>
+        </div>
+
+    <script>
+        $(function (){
+
+$(".left-nav-item-2-1").click(function(){
+  let element = $(".container-left");
+  element.toggleClass("open-height");
+})
+
+$(".fa-paper-plane").click(function(){
+  var text = $(".type_here input").val();
+  if (text) {
+    var new_text = $(".template .message").clone();
+    new_text.children(".content").text(text);
+    new_text.children(".message_time").text(current_time());
+    $(".message_box.active").append(new_text);
+    $(".message_box").scrollTop(10000);
+  };
+  $(".type_here").val("");
+
+  setTimeout (function (){
+    var new_text = $(".template .message").clone();
+    new_text.toggleClass("grey white");
+    new_text.children(".content").text("Hi! Welcome to chat section.");
+    new_text.children(".message_time").text(current_time());
+    $(".message_box.active").append(new_text);
+    $(".header-middle").find(".message_time").text(current_time());
+    $(".chat_list").children(".contact.active").find(".sentence").text("Hi! Welcome to chat section.").css("color", "black").css("font-weight","Bold");
+    $(".chat_list").children(".contact.active").find(".message_time").text(current_time());
+    $(".message_box").scrollTop(10000);
+  }, 1000);
+
+});
+
+$(".type_here").keypress(function(e) {
+    var key = e.which;
+    if (key == 13) {
+      $(".fa-paper-plane").click();
+      return false;
+    }
+  });
+
+$(".searchme").keyup(function() {
+    var lookup = $(this).val().toLowerCase();
+    $(".contact").each(function() {
+      if ($(this).find(".firstname").text().toLowerCase().includes(lookup)) {
+        $(this).show();
+      } else {
+        $(this).hide();
+      }
+    });
+  });
+
+$(".contact").click(function() {
+  // var screen_width = screen.width; 
+
+  // if(screen_width > 1024)
+    var talk = $(this).attr("data-chat");
+    var talkscreen = $('.message_box[data-chat="'+talk+'"]');
+    $(".message_box").removeClass("active");
+    $(".contact").removeClass("active");
+    talkscreen.addClass("active");
+    $(this).addClass("active");
+    var name = $(".contact.active").find(".firstname").text();
+    $(".header-title").children(".name").find(".firstname").text(name);
+    var photo = $(this).find("img").attr("src");
+    $(".header-middle-img").children("img").attr("src", photo)
+  // else{
+  //   var talk = $(this).attr("data-chat");
+  //   var talkscreen = $('.message_box[data-chat="'+talk+'"]');
+  //   $(".message_box").removeClass("active");
+  //   $(".contact").removeClass("active");
+  //   talkscreen.addClass("active");
+  //   $(this).addClass("active");
+  //   var name = $(".contact.active").find(".firstname").text();
+  //   $(".header-title").children(".name").find(".firstname").text(name);
+  //   var photo = $(this).find("img").attr("src");
+  //   $(".header-middle-img").children("img").attr("src", photo)
+  //   $("main-left").css("display","none");
+  //   $("main-middle").css("display","flex");
+  // }
+});
+
+
+$(document).on("click", ".message i", function() {
+  $(this).parent(".message").find(".message_options").toggleClass("active");
+});
+
+$(document).on("click", ".message_delete", function() {
+  $(this).closest(".message").hide();
+});
+});
+
+function current_time() {
+ var d = new Date();
+ var m = d.getMinutes();
+ var h = d.getHours();
+
+ if (m < 10) {
+   m = "0" + m;
+ };
+ if (h < 10) {
+   h = "0" + h;
+ }
+ return h + ":" + m;
+};
+
+    </script>
+
+    </body>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js" integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous"></script>
+</html>

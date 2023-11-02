@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+        crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finder</title>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <style>
+          /* Sidebar styling */
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600;700;800;900&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Gulzar&family=Lora:wght@400;500&family=Quicksand:wght@400;500;600&family=Roboto+Mono:ital,wght@0,300;0,400;1,300&family=Roboto+Slab:wght@300;400&family=Roboto:wght@400;500&family=Ubuntu:ital,wght@0,300;0,400;1,300&family=Varela+Round&display=swap');
+  * {
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+     font-family: 'Quicksand', sans-serif;
+ }
+
+ .main{
+    display: flex;
+ }
+
+ /* Side NavBar styling */
+ .container {
+    width: 6%;
+    min-height: 95vh;
+    display: flex;
+    background-color: white;
+    border-radius: 9px 0 0 9px;
+}
+
+.thickLine{
+ height: 100%;
+ width: 12px;
+ background-color: #ffd51e;
+ border-radius: 0 9px 9px 0;
+}
+
+
+.logo{
+    position: fixed;
+    top:0;
+    display: flex;
+    /* background-color: rgb(231, 252, 0); */
+   }
+.logo img{
+width: 9rem;
+height: 9rem;
+}
+  
+.title{
+    font-family: 'Muller','sans-serif';
+    font-size: 4rem;
+   }
+   
+   .navigation {
+       position: fixed;
+       width: 75px;
+       min-height: 40%;
+       transition: 0.5s;
+       display: flex;
+       justify-content: center;
+       align-items: center;
+       border-radius: 10px 10px;
+       margin-top: 5rem;
+   }
+   
+   
+   .navigation .menu-toggle {
+       position: absolute;
+       top: 0;
+       left: 0;
+       width: 100%;
+       height: 69px;
+       border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+       cursor: pointer;
+       display: flex;
+       justify-content: flex-start;
+       align-items: center;
+       padding: 0 10px;
+   }
+   
+   .menu-toggle img{
+       width: 100%;
+       border-radius: 50%;
+   }
+   
+   .list{
+       margin-top: 11rem;
+   }
+   
+   .navigation ul {
+       display: flex;
+       flex-direction: column;
+       gap: 20px;
+       width: 100%;
+       padding: 0;
+   }
+   
+   .navigation ul li {
+       list-style: none;
+       position: relative;
+       width: 100%;
+       height: 60px;
+       display: flex;
+       justify-content: flex-start;
+       align-items: center;
+       padding: 0 10px;
+       cursor: pointer;
+       transition: 0.5s;
+   }
+   
+   .setting{
+       margin-top: 80%;
+   }
+   
+   .navigation ul li.active {
+       transform: translateX(15px);
+   }
+   
+   .navigation.open ul li.active {
+       transform: translateX(5px);
+   }
+   
+   .navigation ul li a {
+       text-decoration: none;
+       position: relative;
+       display: flex;
+       justify-content: flex-start;
+       text-align: center;
+       align-items: center;
+   }
+   
+   .navigation ul li a .icon {
+       position: relative;
+       display: block;
+       min-width: 55px;
+       height: 55px;
+       line-height: 60px;
+       color: #222;
+       border-radius: 10px;
+       font-size: 1.75em;
+       transition: 0.5s;
+   }
+   
+   .navigation ul li.active a .icon {
+       color: rgb(0, 0, 0);
+       background: var(--color);
+   }
+   
+   .navigation ul li a .icon::before {
+       content: '';
+       position: absolute;
+       top: 10px;
+       left: 0;
+       width: 100%;
+       height: 100%;
+       border-radius: 10px;
+       background: var(--color);
+       filter: blur(8px);
+       opacity: 0;
+       transition: 0.5s;
+   }
+   
+   .navigation ul li.active a .icon::before {
+       opacity: 0.5;
+   }
+   
+   .navigation ul li a .text {
+       position: relative;
+       padding: 0 15px;
+       height: 60px;
+       display: flex;
+       align-items: center;
+       color: #333;
+       opacity: 0;
+       visibility: hidden;
+       transition: 0.5s;
+   }
+   
+   .navigation.open ul li a .text {
+       opacity: 1;
+       visibility: visible;
+   }
+   
+   .navigation ul li.active a .text {
+       color: var(--color);
+   }
+
+ /* Side NavBar styling */
+  /* Sidebar styling */
+
+/* Common styling */
+
+input {
+    border-top-style: hidden;
+    border-right-style: hidden;
+    border-left-style: hidden;
+    border-bottom-style: groove;
+    background-color: #eee;
+    outline: none;
+}
+
+button {
+  border: none;
+}
+
+button:focus {
+  border: none;
+  outline: none;
+}
+
+button:focus{
+  outline:none !important;
+}
+
+
+.no-outline:focus {
+    outline: none;
+  }
+
+  small {
+    color: grey;
+  }
+
+  ::placeholder {
+    font-size: 15px;
+    font-weight: bold;
+  }
+
+  h4, small ,h2{
+    margin: 0;
+    display: inline;
+    text-align: justify;
+    cursor: pointer;
+  }
+
+  p {
+    color: black;
+    padding: 10px;
+  }
+
+
+/* main style */
+.main{
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    background-color:rgb(255, 255, 255) ;
+    overflow: hidden;
+}
+
+@media  screen and (max-width: 1024px) {
+  body{font-size: 20px;}  
+}
+
+/* ######################################################################### */
+
+.header-middle small {
+  display: block;
+}
+
+/* ######################################################################### */
+
+
+/*EOF main style */
+/* <------------------------------------------------------------------------------------------------> */
+
+/* header-left style  */
+.header-left {
+    width: 100%;
+    float: left;
+    background-color: #ffffff ;
+    position: relative;
+    border: none;
+    padding: 2em 3em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* border-bottom: 1px solid rgb(88, 88, 88); */
+    /* border-radius: 10px 10px 0 0; */
+  }
+
+
+  .header-left .logo{
+    width: 20%;
+    margin-right: 10px;
+  }
+
+  .header-left div{
+    display: flex;
+    justify-content: left;
+    align-items: center;
+  }
+.left-nav-item-2-1{
+  padding: 0.5rem 1rem;
+  border-radius: 30px;
+  font-size: 1.5rem;
+  margin: 2px;
+  background-color: #ededed ;
+  color: rgb(73, 83, 80);
+  border: 0;
+  font-weight: bolder;
+  border: none;
+}
+.left-nav-item-2-2{
+  padding: 0;
+  margin: 2px;
+  border: none;
+  border-radius:10px ;
+  background-color: #ffffff ;
+
+}
+
+.dots{
+  display: flex;
+  padding: 5px;
+  flex-direction: column;
+  /* background-color:rgb(255, 255, 255); */
+}
+.dot {
+  height: 0.5rem;
+  width: 0.5rem;
+  margin: 0.75px;
+  background-color:rgb(0, 0, 0);
+  border-radius: 50%;
+  display: inline-block;
+}
+.text{
+  padding: 1rem 4rem;
+  font-size: large;
+  font-weight: bolder;
+  color: rgb(131, 131, 131);
+}
+.text span{
+  margin-left: 1rem;
+}
+
+@media screen and (max-width: 1024px) {
+  .header-left{
+    font-size: 2rem;
+    /* background-color: aqua; */
+  }
+  .header-left h2{
+    font-size: 6rem;
+    font-weight: bolder;
+    /* background-color: aqua; */
+  }
+
+  .left-nav-item-2-1{
+    padding: 1rem 3rem;
+    font-size: 5rem;
+    margin: 0.5rem 3rem;
+  }
+
+  .left-nav-item-2-2{
+    padding: 1px;
+    margin: 2px;
+    border: none;
+    border-radius:10px ;
+  }
+}
+/*EOF header-left style  */
+
+/* left-profile style */
+.details{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* background-color: aqua; */
+}
+.left-profile{
+  width: 100%;
+  background-color: #ffffff ;
+  padding: 1rem 1rem;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.left-profile-top{
+  display: flex;
+}
+
+.dp-username{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+/* .name */
+
+.dp{
+  border-radius: 50%;
+  width: 7rem;
+  height: 7rem;
+  /* margin-bottom: 1rem; */
+}
+
+.username{
+  margin-top: 1.5rem;
+  font-size: large;
+  font-weight: bolder;
+}
+
+ 
+.search-bar{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 40px;
+  margin-top: 5px;
+  width: 80%;
+}
+
+
+.search-bar input {
+  width: 110%;
+  height: 30px;
+  /* float: right; */
+  border: none;
+  /* margin-left: 10px;
+  margin-bottom: 7px; */
+  padding: 2rem 1rem;
+  font-weight: bolder;
+  font-size: 1.6rem;
+  color: rgb(95, 93, 93);
+  font-family:'Glacial Indifference', sans-serif ;
+  border-radius: 10px 0 0 10px;
+}
+
+.search-bar i{
+  background-color: rgb(238, 238, 238);
+  padding: 1rem;
+  font-size: 2rem;
+  color: #696869;
+  border-radius: 0 10px 10px 0;
+}
+
+@media screen and (max-width: 1024px){
+  .left-profile{
+    height: 20vh;
+    /* background-color: #ff00ff; */
+    background-image: url(images/profile_bg.jpg);
+    font-size: 3rem;
+  }
+
+  .left-profile-top{
+    display: flex;
+  }
+
+  .dp{
+    width: 16rem;
+    height: 16rem;
+  }
+
+  .username{
+    margin-top: 1.5rem;
+    font-size: 4rem;
+    font-weight: bolder;
+  }
+  
+  .dp-username{
+    display: flex;
+    margin-top: 2rem;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .dots{
+    font-size: 3rem;
+    height: 8rem;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .dot{
+    height: 1.5rem;
+    width: 1.5rem;
+    margin: 4px;
+  }
+
+   
+.search-bar{
+  margin-top: 1rem;
+  width: 80%;
+  font-size: 3rem;
+}
+
+.search-bar input {
+  width: 100%;
+  height: 100%;
+  border: none;
+  padding: 2rem 2rem;
+  font-weight: bolder;
+  font-size: 3rem;
+  color: rgb(95, 93, 93);
+  border-radius: 10px 0 0 10px;
+}
+.search-bar input::placeholder{
+  font-size: 3rem;
+  font-weight: bolder;
+}
+
+.search-bar i{
+  background-color: rgb(238, 238, 238);
+  padding: 2rem;
+  font-size: 4rem;
+  border-radius: 0 10px 10px 0;
+}
+}
+
+/*EOF left-profile style */
+
+/* container-left style  */
+
+.parent-container-left{
+  height: 79%;
+  background-color: #ffffff  ;
+}
+
+.container-left {
+  width: 100%;
+  position: relative;
+  float: left;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 0 1rem;
+  /* border-radius: 10px 10px 0 0 ; */
+  background-color: #ffffff  ;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.open-height{
+  height: 76%;
+}
+.open-height-inner{
+  height: 100%;
+}
+
+.container-left::-webkit-scrollbar{
+  width: 1px;
+}
+
+.container-left::-webkit-scrollbar {
+  width: 1px    ;         /* width of the entire scrollbar */
+}
+
+.container-left::-webkit-scrollbar-track {
+  color: transparent;     /* color of the tracking area */
+}
+
+.container-left::-webkit-scrollbar-thumb {
+  background-color: rgb(255, 255, 255);    /* color of the scroll thumb */
+  border-radius: 20px;	/* roundness of the scroll thumb */
+  border: rgb(255, 255, 255);  /* creates padding around scroll thumb */
+}
+
+
+
+.container-left .chat-list small {
+  float: right;
+}
+/*EOF container-left style  */
+
+/* chat-list style */
+
+
+.chat-list {
+  margin-top: 10px;
+  /* background-color: rgb(255, 255, 255); */
+  padding: 2px;
+}
+
+@media screen and (max-width: 1024px) {
+  .chat-list{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: stretch;
+  }  
+}
+
+/*EOF chat-list style */
+
+/* .contact */
+
+.contact {
+  display: flex;
+  position: relative;
+  height: 8rem;
+  width: 100%;
+  padding:10px 10px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  margin: 0.3rem;
+  /* justify-content: space-between; */
+  /* border-bottom: 0.5px solid rgba(0,0,0, 0.4); */
+}
+
+@media screen and (max-width: 1024px){
+  .contact{
+    height:20rem;
+  }
+}
+
+.inner-contact-1{
+  width: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  /* background-color: rgb(255, 0, 0); */
+}
+.name{
+  padding: 0.4rem;
+  width: 77%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* background-color: rgb(255, 255, 255); */
+}
+.inner-name-1{
+  display: flex;
+  justify-content: space-between;
+}
+
+.inner-name-2{
+  display: flex;
+  justify-content: left;
+  /* background-color: aqua; */
+
+}
+.inner-contact-1 img{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+
+
+/* .active */
+.contact.active {
+  background-color: #bae1ff;
+}
+
+
+/* .firstname */
+.firstname{
+  font-weight: bolder;
+}
+
+/* .sentence */
+.sentence {
+  display: block;
+  text-align: justify;
+  overflow: hidden;
+}
+
+/* .message_time */
+@media screen and (max-width: 1024px) {
+  .inner-contact-1 img{
+    width: 15rem;
+    height: 15rem;
+  }  
+  .inner-name-1{
+    font-size: 4rem;
+    margin-bottom: 10px;
+  }
+  .inner-name-1 h4{
+    font-size: 5rem;
+  }
+  .inner-name-2 {
+    font-size: 3rem;
+  }
+  
+}
+
+/*EOF main-left style  */
+/* <------------------------------------------------------------------------------------------------> */
+/* main-middle style  */
+
+@media screen and (max-width: 1024px) {
+.main-middle{
+  background-color:#ffffff ;           
+  flex-direction: column;
+  height: 100%;
+  display: none;
+}
+}
+
+@media screen and (min-width: 1024px) {
+    .main-middle{
+      width: 70%;
+      height: 100%;
+      background-color:#f4f4f5 ;
+      display: flex;
+      flex-direction: column;
+      /* border-left: 1px solid grey; */
+      /* height: 99.9vh; */
+      
+    }
+}
+
+/* header-middle style  */
+
+.header-middle {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  /* padding: 3.8rem 1rem; */
+  border: none;
+  /* overflow: hidden; */
+  /* border-bottom: 1px solid grey; */
+  background-color: #ffffff ;
+}
+
+@media screen and (min-width: 1024px){
+  .header-middle{
+    width: 100%;
+    display: flex;
+    /* height: 70px; */
+    border: none;
+    justify-content: space-between;
+    /* overflow: hidden; */
+    padding: 1.4rem 0 1rem 2rem;
+    background-color: #ffffff ;
+    /* border-bottom: 1px solid grey; */
+  }
+}
+
+.header-middle-img{
+  display: flex;
+  /* background-color: #ff00ff; */
+}
+
+.header-middle img {
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.header-middle small {
+  display: block;
+}
+
+.header-title{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 25%;
+}
+/*EOF header-middle style  */
+
+/* .icons_right */
+
+.icons_right{
+  padding-right: 2rem;
+  display:flex ;
+  justify-content: center;
+  align-items: center;
+}
+
+.icons_left i, .icons_right i, .search_bar i {
+  font-size: 20px;
+  margin-left: 20px;
+  margin-right: 10px;
+  cursor: pointer;
+  color: grey;
+}
+
+/* container-middle style */
+.container-middle {
+  width: 100%;
+  /* height: vh; */
+  /* background-image: url("https://backgrounddownload.com/wp-content/uploads/2018/09/whatsapp-chat-background-image.jpg"); */
+  /* background-size: cover; */
+  float:left;
+  /* background-color: rgb(9, 175, 92); */
+  position: relative;
+  height: 79%;
+}
+
+.message_container{
+  height: 92%; 
+}
+
+
+.message_box {
+  height: 100%;
+  position: relative;
+  overflow-y: scroll;
+  padding: 0 50px;
+  display: none;
+  border-radius: 9px;
+}
+.message_box::after {
+  display: table;
+  content: " ";
+  clear: both;
+}
+
+
+.message_box::-webkit-scrollbar {
+  width: 1px    ;         /* width of the entire scrollbar */
+}
+
+.message_box::-webkit-scrollbar-track {
+  color: transparent;     /* color of the tracking area */
+}
+
+.message_box::-webkit-scrollbar-thumb {
+  background-color: rgb(2, 125, 240);    /* color of the scroll thumb */
+  border-radius: 20px;	/* roundness of the scroll thumb */
+  border: rgb(235, 194, 120);  /* creates padding around scroll thumb */
+}
+
+
+.message_box.active, .message .message_options.active {
+  display: block;
+}
+.message {
+  width: 100%;
+  position: relative;
+}
+
+.message h6 {
+  float: right;
+  margin-right: 1rem;
+  color: grey;
+  display: inline;
+}
+.message p {
+  color: black;
+  font-size: 1em;
+}
+.message i {
+  display: none;
+  color: grey;
+  float: right;
+  cursor: pointer;
+  z-index: 2;
+  position: absolute;
+  top: 80%;
+  right: 5rem;
+  transform: translate(-50%);
+}
+.message:hover i {
+  display: block;
+}
+
+
+.white {
+  background-color: #ffffff ;
+  border-radius: 10px;
+  max-width: 45%;
+  float: left;
+  clear: both;
+  margin-bottom: 15px;
+  margin-top: 10px;
+}
+.grey {
+  background-color: #bae1ff; ;
+  border-radius: 10px;
+  max-width: 45%;
+  float: right;
+  clear: both;
+  margin-bottom: 15px;
+}
+
+
+.type_message input {
+  background-color: rgb(255, 255, 255);
+  font-size: 1rem;
+  padding: 6px;
+  width: 50vw;
+  height: 20%;
+  border: none;
+  font-size: 20px;
+  /* background-color: aqua; */
+}
+
+.type_message{
+  width: 96%;
+  margin: 0 auto ;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;;
+  background-color: rgb(255, 255, 255);
+}
+
+.type-message-container{
+  position: relative;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 15vh;
+  /* border-radius: 0 0 10px 10px; */
+  /* background-color: rgb(157, 53, 53); */
+}
+
+
+.type_message i {
+  font-size: 20px;
+  margin: 0 10px;
+  cursor: pointer;
+}
+.template {
+  display: none;
+}
+.message_dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.template .message_options, .message .message_options {
+  display: none;
+  background-color: white;
+  position: absolute;
+  left: 270px;
+  top: 20px;
+  min-width: 100px;
+  z-index: 1;
+}
+
+.message_options{
+  position: absolute;
+  border-radius: 0 0 10px 10px;
+  left: 300px;
+  top: 30px;
+}
+
+/* You can add down message_info if needed */
+.message_delete {
+  color: black;
+  padding: 1rem 1rem;
+  display: block;
+  text-align: center;
+  cursor: pointer;
+}
+.message_info {
+  color: black;
+  padding: 1rem 1rem;
+  display: block;
+  text-align: center;
+  cursor: pointer;
+}
+/*EOF container-middle style */
+
+/*EOF main-middle style  */
+/* <------------------------------------------------------------------------------------------------> */
+        .gradient-custom {
+            /* fallback for old browsers */
+            background: #3BB4FD;
+
+            /* Chrome 10-25, Safari 5.1-6 */
+            background: -webkit-linear-gradient(to right, #3BB4FD, #4581FF);
+
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            background: linear-gradient(to bottom right, #3BB4FD, #4581FF)
+        }
+
+        .card {
+            margin-top: 2em;
+            padding: 1em 0.5em 0.5em;
+            border-radius: 3rem;
+            text-align: center;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+            width: 80%;
+        }
+
+        .card img {
+            width: 40%;
+            border-radius: 40%;
+            margin: 0 auto;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .card .card-title {
+            font-weight: 500;
+            font-size: 1.1em;
+        }
+
+        .card .btn {
+          border-radius: 10rem;
+            background-color: #fede03;
+            color: #ffffff;
+            padding: 0.5em 1.5em;
+        }
+
+        .card .btn:hover {
+            background-color:rgb(218, 189, 59);
+            color: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600;700;800;900&display=swap');
+
+    </style>
+</head>
+
+<body >
+    
+    <section class="vh-100 gradient-custom" style=" background: -webkit-linear-gradient(to right, #3BB4FD, #4581FF); background: linear-gradient(to bottom right, #3BB4FD, #4581FF);">
+        <div class="container-fluid py-1 main">
+            <!--<h1>{{ data }}</h1>-->
+                    <div class="container sidebar" >
+                            <!-- <div class="logo">
+                                <img src="/static/default.png" alt="TRUSS">
+                            </div> -->
+                          <div class="navigation">
+                              <div class="menu-toggle">
+                                  <img src="/static/default.png" alt="user">
+                              </div>
+                              <div>
+                                <ul class="list">
+                                  <li class="list-item" style="--color:#ffd51e">
+                                      <a href="#">
+                                        <span class="icon">
+                                          <ion-icon name="home-outline"></ion-icon>
+                                        </span>
+                                      </a>
+                                    </li>
+                                  <li class="list-item" style="--color:#ffd51e">
+                                      <a href="/chat">
+                                        <span class="icon">
+                                          <ion-icon name="chatbox-ellipses-outline"></ion-icon>
+                                        </span>
+                                      </a>
+                                    </li>
+                                    <li class="list-item" style="--color:#ffd51e">
+                                      <a href="/ud">
+                                          <span class="icon">
+                                              <ion-icon name="book-outline"></ion-icon>
+                                          </span>
+                                        </a>
+                                      </li>
+                                      <li class="list-item" style="--color:#ffd51e">
+                                        <a href="/ud">
+                                          <span class="icon">
+                                            <ion-icon name="rocket-outline"></ion-icon>
+                                          </span>
+                                        </a>
+                                      </li>
+                                      <li class="list-item setting" style="--color:#ffd51e">
+                                        <a href="/ud">
+                                          <span class="icon">
+                                            <ion-icon name="settings-outline"></ion-icon>
+                                          </span>
+                                        </a>
+                                      </li>
+                                      
+                                    </ul>
+                                  </div>
+                          </div>
+                          
+                      </div>
+                      
+                <div class="thickLine"></div>
+                    <div class="container-fluid text-center " style="background: -webkit-linear-gradient(to right, #3BB4FD, #4581FF); background: linear-gradient(to bottom right, #3BB4FD, #4581FF); overflow: auto;"> 
+                        <div class="row">
+                        
+                        {% for user in data%}
+                                    <div class='col'>
+                                      <center><div class='card' style='width: 18rem;border: 10px solid #1eff74;'>
+                                        <h5><b>{{user['role_preference']}}</b></h5>
+                                        <img src='/static/default.png' class='card-img-top' alt=''>
+                                        <div class='card-body'>
+                                          <h5 class='card-title'>{{user['name']}}</h5>
+                                          <p class='card-text'>{{user['skill_1'][:15]+".."}}<br>{{user['skill_2'][:15]+".."}}</p>
+                                          <a href='/profile' class='btn' style='color: black;'>Connect</a>
+                                        </div>
+                                      </div>
+                                      </center>
+                                    </div>
+                                    {% endfor %}  
+                                    
+                                    {% for user in data2%}
+                                    <div class='col'>
+                                      <center><div class='card' style='width: 18rem;border: 10px solid #ffd51e;'>
+                                        <h5><b>{{user[15]}}</b></h5>
+                                        <img src='/static/default.png' class='card-img-top' alt=''>
+                                        <div class='card-body'>
+                                          <h5 class='card-title'>{{user[2]}}</h5>
+                                          <p class='card-text'>{{user[9][:15]+".."}}<br>{{user[11][:15]+".."}}</p>
+                                          <a href='/profile' class='btn' style='color: black;'>Connect</a>
+                                        </div>
+                                      </div>
+                                      </center>
+                                    </div>
+                                    {% endfor %}
+                                    
+                                   
+                        </div>
+                    </div>
+                
+        </div>
+        <a href="php/logout.php" style="cursor:pointer">Logout</a> <br> 
+        {{data}}
+    </section>
+
+</body>
+<script>
+    // const menuToggle = document.querySelector('.menu-toggle');
+    const navigation = document.querySelector('.navigation');
+    // menuToggle.onclick = () => {
+    // navigation.classList.toggle('open');
+    // }
+
+    const listItems = document.querySelectorAll('.list-item');
+    listItems.forEach(item => {
+    item.onclick = () => {
+        listItems.forEach(item => item.classList.remove('active'));
+        item.classList.add('active');
+    }
+    })
+</script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js" integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous"></script>
+
+</html>

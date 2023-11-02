@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+    <link rel="preconnect" href="https://fonts.googleapis.com"> 
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" intgrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<head>
+    <script type='text/javascript'>
+  window.smartlook||(function(d) {
+    var o=smartlook=function(){ o.api.push(arguments)},h=d.getElementsByTagName('head')[0];
+    var c=d.createElement('script');o.api=new Array();c.async=true;c.type='text/javascript';
+    c.charset='utf-8';c.src='https://web-sdk.smartlook.com/recorder.js';h.appendChild(c);
+    })(document);
+    smartlook('init', 'c91fcc6ae23796d8122ee672254e46c6729fb359', { region: 'eu' });
+</script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>TRUSS</title>
+    <style>
+		section {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			text-align: center;
+			width: 99vw;
+			height: 100vh;
+		 
+		  /* Scroll Snap */
+			scroll-snap-align: center;
+			background-size: cover;
+		}
+        body::-webkit-scrollbar {
+            width: 1px    ;         /* width of the entire scrollbar */
+        }
+
+        body::-webkit-scrollbar-track {
+        	color: transparent;     /* color of the tracking area */
+        }
+
+        body::-webkit-scrollbar-thumb {
+        	background-color: rgb(2, 125, 240);    /* color of the scroll thumb */
+        	border-radius: 20px;	/* roundness of the scroll thumb */
+        	border: rgb(235, 194, 120);  /* creates padding around scroll thumb */
+        }
+        img#page1_image {
+            width: 65vw;
+            min-width: 350px;
+        }
+		span{
+			font-weight: bolder;
+		}
+
+        .page1_text {
+            font-family: 'Lexend Giga', sans-serif;
+            font-weight: bold;
+            text-shadow: -1px 1px 2px rgba(0, 0, 0, 0.7);
+            font-size: 3vw;
+            color: #0d3a5c;
+        }
+
+		.page2_1{
+			text-align: center;
+			font-weight: bolder;
+			font-size: 1.1rem;
+			font-family: 'Quicksand', sans-serif;
+			
+		}
+		@media screen and (min-width: 1024px) {
+		    .page2_1{
+			text-align: center;
+			font-weight: bolder;
+			font-size: 1.875rem;
+			font-family: 'Quicksand', sans-serif;
+			}
+		}
+	
+		img#page2_1{
+			width: 74vw;
+			min-width: 370px;
+		}
+		img#page2_2{
+			width: 5vw;
+			min-width: 60px;
+		}
+		img#page2_3{
+			width: 8vw;
+			min-width: 70px;
+		}
+		img#page2_4{
+			width: 6vw;
+			min-width: 70px;
+		}
+        #gif{
+
+			font-size: 200%;
+			font-weight: bolder;
+			color: ghostwhite;
+			text-shadow: -3px 3px 20px rgba(0, 0, 0, 0.5);
+			font-family: 'Mulish', sans-serif;
+		}
+		span#blue{
+				color: #fede03;
+				font-size: 100%;
+				font-family: 'Quicksand', sans-serif;
+			}
+			span#black{
+				font-size: 100%;
+				color: black;
+				font-family: 'Quicksand', sans-serif;
+			}
+		@media screen and (min-width: 768px) {
+		    span#blue{
+				color: #fede03;
+				font-size: 150%;
+				font-family: 'Quicksand', sans-serif;
+			}
+			span#black{
+				font-size: 150%;
+				color: black;
+				font-family: 'Quicksand', sans-serif;
+			}
+		}
+		
+		#page5img{
+			width: 100%;			
+		}
+		@media screen and (min-width:480px){
+			#page5img{
+				content: url("static/page5.png");
+				height: 100%;
+				width:100%;
+			}
+		}
+		@media screen and (max-width:480px) {
+			#page5img{
+			content: url("static/page5img.png");
+			}
+		}
+		.pricing_box{
+			margin: 1vw;
+			border: 3px solid black;
+			background-color: ghostwhite;
+			border-radius: 30px;
+			width: 20vw;
+			min-width: 100px;
+			height: 20vw;
+			min-height: 190px;
+			font-size: 5vw;
+			box-shadow: 10px 10px 0px dodgerblue;
+			display: inline-block;
+
+		}
+		
+		@media screen and (min-width: 1024px){
+		    .pricing_box{
+			margin: 15px;
+			border: 3px solid black;
+			background-color: ghostwhite;
+			border-radius: 30px;
+			width: 200px;
+			height: 300px;
+			font-size: 3.125rem;
+			box-shadow: 10px 10px 0px dodgerblue;
+			display: inline-block;
+
+			}
+		}
+
+		.pricing_box#month_3{
+			margin-left: 20px;
+			width: 110px;
+			height: 150px;
+			min-width: 110px;
+        	min-height: 200px;
+		}
+
+		.pricing_box#month_6{
+
+			width: 110px;
+			height: 150px;
+			min-width: 110px;
+        	min-height: 200px;
+		}
+		.pricing_box#month_12{
+
+			width: 110px;
+			height: 150px;
+			min-width: 110px;
+        	min-height: 200px;
+		}
+
+		
+		@media screen and (min-width: 1024px){
+		    .pricing_box#month_6{
+			width: 325px;
+			height: 200px;
+		}
+			.pricing_box#month_3{
+				margin-right: 20px;
+			}
+		}
+
+		input[type=number]{
+			position: relative;
+			font-size: 1.25rem;
+			border: 3px solid black;
+			background-color: ghostwhite;
+			padding: 10px 5px;
+			text-align: center;
+			border-radius: 15px;
+			width: 80px;
+		}
+			@media screen and (min-width: 1024px){
+			    input[type=number]{
+			position: relative;
+			font-size: 1.25rem;
+			border: 3px solid black;
+			background-color: ghostwhite;
+			padding: 10px 5px;
+			text-align: center;
+			border-radius: 15px;
+		}
+			}
+			@media screen and (min-width: 1024px) {
+				#gif{
+				border: 10px solid #fede03;
+				border-radius: 10vh;
+				margin-right: 5vh;
+				height: 60vh;
+				width: 65vh;
+				font-size: 3.75rem;
+				font-weight: bolder;
+				text-shadow: -3px 3px 20px rgba(0, 0, 0, 0.5);
+				font-family: 'Mulish', sans-serif;
+				overflow: hidden;
+				}
+			}
+		nav {
+			position:fixed;
+			top:0;
+			font-size: 100%;
+			font-family: 'Quicksand', sans-serif; 
+		}
+		@media screen and (min-width:768px) {
+			nav{
+				font-size: 150%;
+				font-weight:bolder;
+			}
+			#i{
+				width:60%;
+			}
+			.navbar-nav > li{
+			padding-left:30px;
+			padding-right:30px;
+			}
+		}
+    </style>
+
+</head>
+<body style="background-image: linear-gradient(to right, #3BB4FD, #4581FF);">
+    	
+	<nav class="navbar navbar-expand-lg sticky-top navbar-light" style="background: linear-gradient(to right, #3BB4FD, #4581FF); box-shadow: 0 4px 4px -4px rgba(0,0,0,.2);
+">
+        <div class="container-fluid ">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation" style="width:15% ;">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse justify-content-center" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="#page3">Learn</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#page6">Connect</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#page7">Grow</a>
+              </li>
+            </ul>
+            
+          </div>
+          <a href="/signup1" style="position:fixed; right: 1%; top:2%" class="btn " style="background-color: white;">Sign Up</a>
+		  <a href="/signin" style="position:fixed; right: 8%; top:2%" class="btn " style="background-color: white;">Log In</a>
+        </div>
+    </nav>
+    
+
+	<section id="page1">
+        <div class="container text-center" style="padding-bottom:35%;padding-top:25%;">
+            <img src="static/truss_logo_withtext.png" class="img-fluid" id="i" style="width: 70%;">
+            <div class="page1_text" >
+                The bridge for student entrepreneurs
+                <h1>{{ data }}</h1>
+            </div>
+        </div>
+    </section>
+
+
+	<section id="page6">
+		<div class="container mb-5" style="padding-bottom:25%; ">
+		<div class="row">
+			<div class="col-sm text-center">
+				<div class="wrapper" id="gif">
+				CONNECT <br>
+				<img src="static/connect.png" id="image6" style="width:70%">
+
+
+				</div>
+			</div>
+
+			<div class="col-sm" id="info" style="font-family: 'Quicksand', sans-serif; margin-top: 5%; text-align: left; ">
+
+					<h4><span id="black">-For</span> <span id="blue">18 - 22 year</span> <span id="black">old only.</span></h4><br>
+					<h4><span id="blue">-End-to-end</span><span id="black"> networking.</span><br>Hassle-free connection.</h4><br>
+					<h4><span id="blue">-Personalized </span><span id="black">recommendations</span><br>Perfect fit for you and your startup! </h4><br>
+					<h4><span id="black">-Members' </span><span id="blue">exclusive </span><span id="black">events and a lot more</span><br>Exciting Comunity for all things new!</h4><br>
+				<!-- <br>	
+					<a href="register.html" class="btn btn-primary text-center btn-lg" style=" width: 100%;">
+					Register Your Interest Here
+					</a> -->
+			</div>
+		</div>
+		</div>
+	</section>
+
+	<section id="page9" >
+		<div class="container mb-3" >
+			<h1  class="mb-3" style="font-size: 3rem; text-shadow: -2px 2px 5px rgba(0, 0, 0, 0.7); display: inline-block; text-align: left;color:ghostwhite">PRICING
+			<span><script src="https://cdn.lordicon.com/xdjxvujz.js"></script>
+			<!-- <lord-icon
+				src="https://cdn.lordicon.com/qlncusvo.json"
+				trigger="loop-on-hover"
+				colors="primary:#0691f8"
+				state="hover"
+				style="width:7vw;height:7vw;min-width: 10vw;min-height:10vw ;" >
+			</lord-icon> -->
+			</span>
+			</h1>
+			<br>
+			<br>
+			<h4 style="font-size:1.3rem; text-align: center;" class="mb-3">
+				<span id="black">Tell Us What You Think Could Be Our Prices...</span>
+			</h4>
+			<form action = "php/chaching.php" method = "POST">
+				<div class="row ">
+				<div class=" col-sm pricing_box" id="month_3">
+		
+					3<br>months!<br>
+					<input type="number" name="pricing_3" placeholder="?" id="pricing_3">
+				</div>
+		
+				<div class="col-sm pricing_box" id="month_6">
+		
+					6<br>months!<br>
+					<input type="number" name="pricing_6" placeholder="?" id="pricing_6">
+				</div>
+				<div class="col-sm pricing_box" id="month_12">
+		
+					12<br>months!<br>
+					<input type="number" name="pricing_12" id="pricing_12" placeholder="?">
+				</div>
+				</div>
+                <div class="container py-5">
+					<button class="btn btn-outline" type="submit" style="width: 50%; background-color:#fede03;font-size:150%"> Cha-ching </button>
+				</div>
+			</form>
+		</div>
+		<div class="container-fluid mb-4" style="background-color:#004aad">
+		    <img src="static/page2_1.png" style="width:55%;">
+		    <link href='https://fonts.googleapis.com/css?family=Lexend Giga' rel='stylesheet'>
+		    <h4 style=" font-family: 'Lexend Giga';color:ghostwhite;font-size:3rem">Join us to bridge the gap to your <span style="color:#ffd15e">dreams</span></h4>
+		</div>
+        <div class="container-fluid mb-4">
+         <h3 class="text-light py-5 mb-4" style="font-family: 'Quicksand', sans-serif;font-size:4rem">Questions?</h3>
+         <div class="row mb-5" style="font-family: 'Quicksand', sans-serif;">
+	          <div class="col">
+	               <h4 class="mb-4" style="color: #ffd51e;"><b>Headquarters</b></h4>
+	          </div>
+	          <div class="col">
+	               <h4 class="mb-4 text-light">Hyderabad, India</h4>
+	          </div>
+	          <div class="w-100"></div>
+	          <div class="col">
+	               <h4 class="mb-4" style="color: #ffd51e"><b>Email</b></h4>
+	          </div>
+	          <div class="col">
+	               <h4 class="text-light mb-4">network.truss@gmail.com</h4>
+	          </div>
+	          <div class="w-100"></div>
+	           <div class="col">
+	               <h4 class="mb-4" style="color: #ffd51e"><b>Phone Number</b></h4>
+	          </div>
+	          <div class="col">
+	               <h4 class="text-light mb-4">+91 6302135474</h4>
+	          </div>
+	          <div class="w-100"></div>
+	           <div class="col">
+	               <h4 class="mb-4" style="color: #ffd51e"><b>Social Media</b></h4>
+	          </div>
+	          <div class="col">
+	               <h4 class="text-light mb-4">@truss.network</h4>
+	          </div>
+	          <div class="w-100"></div>
+	          
+	    </div>
+	    </div>
+	</section>
+	<!--<section id="page10" style="margin-bottom:60%" >	-->
+	<!--		<div class="container-sm" style="width: 70%; ">-->
+		
+	<!--		</div>-->
+	<!--	<footer class="text-center text-lg-start text-muted">-->
+  
+		<!-- Section: Links  -->
+	<!--	  <div class="container-fluid text-center mt-5">-->
+			<!-- Grid row -->
+	<!--		<div class="row mt-4">-->
+			  <!-- Grid column -->
+			  
+	<!--		  <div class="col-sm col-lg-3 col-xl-2 mx-auto mb-4">-->
+				<!-- Content -->
+	<!--			<img src="static/truss_logo.png" alt="" class="img-fluid" style="width: 100%; ">-->
+	<!--		  </div>-->
+			  <!-- Grid column -->
+	  
+			  <!-- Grid column -->
+	<!--		  <div class="col-sm col-lg-3 col-xl-2 mx-auto mb-4">-->
+				<!-- Links -->
+	<!--			<br>-->
+	<!--			<h6 class="text-uppercase fw-bold mb-4">-->
+	<!--			  Product-->
+	<!--			</h6>-->
+	<!--			<p>-->
+	<!--			  <a href="#!" class="text-reset">Learn</a>-->
+	<!--			</p>-->
+	<!--			<p>-->
+	<!--			  <a href="#!" class="text-reset">Connect</a>-->
+	<!--			</p>-->
+	<!--			<p>-->
+	<!--			  <a href="#!" class="text-reset">Grow</a>-->
+	<!--			</p>-->
+	<!--		  </div>-->
+			  <!-- Grid column -->
+	  
+			  <!-- Grid column -->
+	<!--		  <div class="col-sm col-lg-3 col-xl-2 mx-auto mb-4">-->
+				<!-- Links -->
+	<!--			<h6 class="text-uppercase fw-bold mb-4">-->
+	<!--				<br>-->
+	<!--			  Resources-->
+	<!--			</h6>-->
+	<!--			<p>-->
+	<!--			  <a href="#!" class="text-reset">Blog</a>-->
+	<!--			</p>-->
+	<!--			<p>-->
+	<!--			  <a href="#!" class="text-reset">User guides</a>-->
+	<!--			</p>-->
+	<!--			<p>-->
+	<!--			  <a href="#!" class="text-reset">Webinars</a>-->
+	<!--			</p>-->
+	<!--		  </div>-->
+			  <!-- Grid column -->
+	  
+	
+	<!--		  <div class="col-sm-2 col-lg-2 col-xl-2 mx-auto mb-3">-->
+				<!-- Links -->
+	<!--			<br>-->
+	<!--			<h6 class="text-uppercase fw-bold mb-4">-->
+	<!--			  Company-->
+	<!--			</h6>-->
+	<!--			<p>-->
+	<!--			  <a href="#!" class="text-reset">About</a>-->
+	<!--			</p>-->
+	<!--			<p>-->
+	<!--			  <a href="#!" class="text-reset">Join Us</a>-->
+	<!--			</p>-->
+	<!--		  </div>-->
+			  <!-- Grid column -->
+	<!--		  <div class="col-sm-3 col-lg-4 col-xl-3 mx-auto mb-4" style="text-align: left;">-->
+				<!-- Links -->
+	<!--			<form action="">-->
+					<!--Grid row-->
+	<!--				<div class="row d-flex">-->
+					  <!--Grid column-->
+	<!--				  <div class="col-auto">-->
+	<!--					<p class="pt-4">-->
+	<!--					  <strong>Sign up for our newsletter</strong>-->
+	<!--					</p>-->
+	<!--					<p>For product announcements and exclusive insights</p>-->
+	<!--					<div class="form-outline form-white mb-4">-->
+	<!--						<div class="input-group">-->
+	<!--							<input type="email" class="form-control" placeholder="Enter your email">-->
+	<!--							<span class="input-group-btn">-->
+	<!--							<button class="btn btn-primary" type="submit">Subscribe</button>-->
+	<!--							</span>-->
+	<!--							 </div>-->
+	<!--					   </div>-->
+	<!--					</div>-->
+	<!--				  </div>-->
+					  <!--Grid column-->
+			
+					  <!--Grid column-->
+					  
+	<!--	  		</div>-->
+	<!--			</form>-->
+	<!--		  </div>-->
+		<!-- Section: Links  -->
+		<!-- Copyright -->
+	<!--	<div class="container text-center">-->
+	<!--	  © 2022 Copyright:-->
+	<!--	  <a class="text-reset fw-bold" href="">Truss</a>-->
+	
+	<!--	</div>-->
+		<!-- Copyright -->
+	<!--  </footer>-->
+ <!--  </section>-->
+   
+<script>
+	
+	$('.header a').on('click', function (e) {
+  if (this.hash !== '') {
+	e.preventDefault();
+
+	const hash = this.hash;
+
+	$('html, body')
+	  .animate({
+		scrollTop: $(hash).offset().top
+	  },800);
+  }
+});
+
+</script>
+</body>
+</html>

@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+        crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Founder Skills</title>
+    <style>
+        .gradient-custom {
+            /* fallback for old browsers */
+            background: #3BB4FD;
+
+            /* Chrome 10-25, Safari 5.1-6 */
+            background: -webkit-linear-gradient(to right, #3BB4FD, #4581FF);
+
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            background: linear-gradient(to bottom right, #3BB4FD, #4581FF)
+        }
+
+        .card-registration .select-input.form-control[readonly]:not([disabled]) {
+            font-size: 1rem;
+            line-height: 2.15;
+            padding-left: .75em;
+            padding-right: .75em;
+        }
+
+        .card-registration .select-arrow {
+            top: 13px;
+        }
+        /* #skills_have1{
+            background: -webkit-linear-gradient(left, #fede03 50%, white 50%);
+            background: -moz-linear-gradient(left, #fede03 50%, white 50%);
+            background: -ms-linear-gradient(left, #fede03 50%, white 50%);
+            background: linear-gradient(left, #fede03 50%, white 50%);
+            background-repeat: no-repeat;
+        } */
+        /* #levels{
+            display: none;
+        } */
+        .levels{
+            display: none;
+        }
+
+        #skills_have1:hover + #levels1{
+            display: block;
+        }
+
+        #levels1:hover{
+            display: block;
+        }
+
+        #skills_have2:hover + #levels2{
+            display: block;
+        }
+
+        #levels2:hover{
+            display: block;
+        }
+
+        #skills_have3:hover + #levels3{
+            display: block;
+        }
+
+        #levels3:hover{
+            display: block;
+        }
+
+        #skills_have4:hover + #levels4{
+            display: block;
+        }
+
+        #levels4:hover{
+            display: block;
+        }
+
+        #skills_have5:hover + #levels5{
+            display: block;
+        }
+
+        #levels5:hover{
+            display: block;
+        }
+
+        #skills_have6:hover + #levels6{
+            display: block;
+        }
+
+        #levels6:hover{
+            display: block;
+        }
+
+        #skills_have7:hover + #levels7{
+            display: block;
+        }
+
+        #levels7:hover{
+            display: block;
+        }
+
+        #skills_have8:hover + #levels8{
+            display: block;
+        }
+
+        #levels8:hover{
+            display: block;
+        }
+        
+    </style>
+
+<body>
+    <img src="static/truss_logo.png" width="15%" style="float: left; position: absolute;">
+ 
+    <section class="vh-100% gradient-custom">
+        <div class="container py-5 h-100">
+            <div class="row justify-content-center align-items-center h-100">
+                <div class="col-12 col-lg-9 col-xl-7">
+                    <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+                        <div class="card-body p-4 p-md-5">
+                            <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Founder Skills</h3>
+                            <form action = "php/signup.php" method = "POST">
+                                
+                                
+                                <div class="row">
+                                    <div class="col-md-6 mb-3 pb-2">
+
+                                        <div class="form-outline">
+                                            <label  class="form-label" for="skills_have1">Your <b>First</b> Skill</label>
+                                            <input onmouseover="show('1')"  class="form-control" name='skills_have1' list="datalistOptions" id="skills_have1" placeholder="Choose skill...">
+                                            <div class="p-2 levels" id="levels1" >
+                                                <button type="button" onclick="begginer('1')" class="btn btn-primary">Beginner</button>
+                                                <button type="button" onclick="amateur('1')" class="btn mx-2 my-2 btn-primary">Amateur</button>
+                                                <button type="button" onclick="intermediate('1')" class="btn btn-primary">Intermediate</button>
+                                                <button type="button" onclick="advanced('1')" class="btn btn-primary">Advanced</button>
+                                            </div>
+                                            <datalist id="datalistOptions">
+                                                <option value="Computer software knowledge"></option>
+                                                <option value="Graphic design"></option>
+                                                <option value="Data analysis"></option>
+                                                <option value="Project management"></option>
+                                                <option value="Marketing"></option>
+                                                <option value="Copywriting"></option>
+                                                <option value="Computer programming"></option>
+                                                <option value="Foreign languages"></option>
+                                                <option value="Search engine optimization (SEO)"></option>
+                                                <option value="Customer service"></option>
+                                                <option value="Sales"></option>
+                                                <option value="Accounting"></option>
+                                                <option value="Business development"></option>
+                                                <option value="Digital marketing"></option>
+                                                <option value="Sales management"></option>
+                                                <option value="Finance"></option>
+                                                <option value="Social media"></option>
+                                                <option value="Sales and marketing"></option>
+                                                <option value="Financial analysis"></option>
+                                                <option value="Engineering"></option>
+                                                <option value="Social media marketing"></option>
+                                                <option value="Structured query language (SQL)"></option>
+                                                <option value="Figma"></option>
+                                                <option value="UI/UX"></option> 
+                                                <option value="Designing"></option>
+                                                <option value="Painting"></option>
+                                                <option value="Fashion designing"></option>
+                                                <option value="Video editors"></option>
+                                                <option value="Photography"></option>
+                                            </datalist>
+
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-6 mb-3 pb-2">
+
+                                        <div class="form-outline">
+                                            <label class="form-label" for="skills_have2">Your <b>Second</b> Skill</label>
+                                            <input onmouseover="show('2')" class="form-control" name='skills_have2' list="datalistOptions" id="skills_have2" placeholder="Choose skill...">
+                                            <div class="p-2 levels" id="levels2" >
+                                                <button type="button" onclick="begginer('2')" class="btn btn-primary">Beginner</button>
+                                                <button type="button" onclick="amateur('2')" class="btn mx-2 my-2 btn-primary">Amateur</button>
+                                                <button type="button" onclick="intermediate('2')" class="btn btn-primary">Intermediate</button>
+                                                <button type="button" onclick="advanced('2')" class="btn btn-primary">Advanced</button>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-6 mb-3 pb-2">
+
+                                        <div class="form-outline">
+                                            <label class="form-label" for="skills_have3">Your <b>Third</b> Skill</label>
+                                            <input onmouseover="show('3')" class="form-control" name='skills_have3' list="datalistOptions" id="skills_have3" placeholder="Choose skill...">
+                                            <div class="p-2 levels" id="levels3" >
+                                                <button type="button" onclick="begginer('3')" class="btn btn-primary">Beginner</button>
+                                                <button type="button" onclick="amateur('3')" class="btn mx-2 my-2 btn-primary">Amateur</button>
+                                                <button type="button" onclick="intermediate('3')" class="btn btn-primary">Intermediate</button>
+                                                <button type="button" onclick="advanced('3')" class="btn btn-primary">Advanced</button>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-6 mb-3 pb-2">
+
+                                        <div class="form-outline">
+                                            <label class="form-label" for="skills_have4">Your <b>Fourth</b> Skill</label>
+                                            <input onmouseover="show('4')" class="form-control" name='skills_have4' list="datalistOptions" id="skills_have4" placeholder="Choose skill...">
+                                            <div class="p-2 levels" id="levels4" >
+                                                <button type="button" onclick="begginer('4')" class="btn btn-primary">Beginner</button>
+                                                <button type="button" onclick="amateur('4')" class="btn mx-2 my-2 btn-primary">Amateur</button>
+                                                <button type="button" onclick="intermediate('4')" class="btn btn-primary">Intermediate</button>
+                                                <button type="button" onclick="advanced('4')" class="btn btn-primary">Advanced</button>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <br>
+                                <hr class="style1" style="border-top: 2px solid #8c8b8b;">
+                                <br>
+                                <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Skills you are Looking for in Co-Founder?</h3>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3 pb-2">
+
+                                        <div class="form-outline">
+                                            <label class="form-label" for="skills_have5"><b>First</b> skill</label>
+                                       <input onmouseover="show('5')" class="form-control" name='skills_required1' list="datalistOptions" id="skills_have5" placeholder="Choose skill...">
+                                       <div class="p-2 levels" id="levels5" >
+                                        <button type="button" onclick="begginer('5')" class="btn btn-primary">Beginner</button>
+                                        <button type="button" onclick="amateur('5')" class="btn mx-2 my-2 btn-primary">Amateur</button>
+                                        <button type="button" onclick="intermediate('5')" class="btn btn-primary">Intermediate</button>
+                                        <button type="button" onclick="advanced('5')" class="btn btn-primary">Advanced</button>
+                                    </div>
+
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-md-6 mb-3 pb-2">
+
+                                        <div class="form-outline">
+                                            <label class="form-label" for="skills_have6"><b>Second</b> skill</label>
+                                       <input onmouseover="show('6')" class="form-control" name='skills_required2' list="datalistOptions" id="skills_have6" placeholder="Choose skill...">
+                                       <div class="p-2 levels" id="levels6" >
+                                        <button type="button" onclick="begginer('6')" class="btn btn-primary">Beginner</button>
+                                        <button type="button" onclick="amateur('6')" class="btn mx-2 my-2 btn-primary">Amateur</button>
+                                        <button type="button" onclick="intermediate('6')" class="btn btn-primary">Intermediate</button>
+                                        <button type="button" onclick="advanced('6')" class="btn btn-primary">Advanced</button>
+                                    </div>
+
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-md-6 mb-3 pb-2">
+
+                                        <div class="form-outline">
+                                            <label class="form-label" for="skills_have7"><b>Third</b> skill</label>
+                                       <input onmouseover="show('7')" class="form-control" name='skills_required3' list="datalistOptions" id="skills_have7" placeholder="Choose skill...">
+                                       <div class="p-2 levels" id="levels7" >
+                                        <button type="button" onclick="begginer('7')" class="btn btn-primary">Beginner</button>
+                                        <button type="button" onclick="amateur('7')" class="btn mx-2 my-2 btn-primary">Amateur</button>
+                                        <button type="button" onclick="intermediate('7')" class="btn btn-primary">Intermediate</button>
+                                        <button type="button" onclick="advanced('7')" class="btn btn-primary">Advanced</button>
+                                    </div>
+
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-md-6 mb-3 pb-2">
+
+                                        <div class="form-outline">
+                                            <label class="form-label" for="skills_have8"><b>Fourth</b> skill</label>
+                                       <input onmouseover="show('8')" class="form-control" name='skills_required4' list="datalistOptions" id="skills_have8" placeholder="Choose skill...">
+                                       <div class="p-2 levels" id="levels8" >
+                                        <button type="button" onclick="begginer('8')" class="btn btn-primary">Beginner</button>
+                                        <button type="button" onclick="amateur('8')" class="btn mx-2 my-2 btn-primary">Amateur</button>
+                                        <button type="button" onclick="intermediate('8')" class="btn btn-primary">Intermediate</button>
+                                        <button type="button" onclick="advanced('8')" class="btn btn-primary">Advanced</button>
+                                    </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="mt-2 pt-2">
+                                    <input class="btn btn-primary btn-lg"
+                                        style="background-color: #fede03 ; color: black; border:none; width: 100%;"
+                                        type="submit" value="Submit" />
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<script>
+    // function show(x){
+    //     if(document.getElementById('skills_have'+x).value!==""){
+    //         document.getElementById('levels'+x).style.display="block";
+    //     }
+        
+    // }
+    function begginer(x){
+        document.getElementById('skills_have'+x).style.background="-webkit-linear-gradient(left, #fede03 50%, white 50%)"
+        document.getElementById('skills_have'+x).style.background="-moz-linear-gradient(left, #fede03 50%, white 50%);"
+        document.getElementById('skills_have'+x).style.background="-ms-linear-gradient(left, #fede03 50%, white 50%);"
+        document.getElementById('skills_have'+x).style.background="linear-gradient(left, #fede03 50%, white 50%);"
+        document.getElementById('skills_have'+x).style.backgroundRepeat="no-repeat"
+        document.getElementById('skills_have'+x).style.backgroundSize="50%"
+        
+    }
+    function amateur(x){
+        document.getElementById('skills_have'+x).style.background="-webkit-linear-gradient(left, #fede03 50%, white 50%)"
+        document.getElementById('skills_have'+x).style.background="-moz-linear-gradient(left, #fede03 50%, white 50%);"
+        document.getElementById('skills_have'+x).style.background="-ms-linear-gradient(left, #fede03 50%, white 50%);"
+        document.getElementById('skills_have'+x).style.background="linear-gradient(left, #fede03 50%, white 50%);"
+        document.getElementById('skills_have'+x).style.backgroundRepeat="no-repeat"
+        document.getElementById('skills_have'+x).style.backgroundSize="100%"
+        
+}
+
+   function intermediate(x){
+        document.getElementById('skills_have'+x).style.background="-webkit-linear-gradient(left, #fede03 50%, white 50%)"
+        document.getElementById('skills_have'+x).style.background="-moz-linear-gradient(left, #fede03 50%, white 50%);"
+        document.getElementById('skills_have'+x).style.background="-ms-linear-gradient(left, #fede03 50%, white 50%);"
+        document.getElementById('skills_have'+x).style.background="linear-gradient(left, #fede03 50%, white 50%);"
+        document.getElementById('skills_have'+x).style.backgroundRepeat="no-repeat"
+        document.getElementById('skills_have'+x).style.backgroundSize="150%"
+        
+        
+    }
+    function advanced(x){
+        document.getElementById('skills_have'+x).style.background="-webkit-linear-gradient(left, #fede03 50%, white 50%)"
+        document.getElementById('skills_have'+x).style.background="-moz-linear-gradient(left, #fede03 50%, white 50%);"
+        document.getElementById('skills_have'+x).style.background="-ms-linear-gradient(left, #fede03 50%, white 50%);"
+        document.getElementById('skills_have'+x).style.background="linear-gradient(left, #fede03 50%, white 50%);"
+        document.getElementById('skills_have'+x).style.backgroundRepeat="no-repeat"
+        document.getElementById('skills_have'+x).style.backgroundSize="200%"
+        
+    }
+    function toggleLevels(inputId, levelsId) {
+            const input = document.getElementById(inputId);
+            const levels = document.getElementById(levelsId);
+
+            input.addEventListener('input', function () {
+                if (input.value.trim() !== '') {
+                    levels.style.display = 'block';
+                } else {
+                    levels.style.display = 'none';
+                }
+            });
+
+            // Initial check
+            if (input.value.trim() !== '') {
+                levels.style.display = 'block';
+            } else {
+                levels.style.display = 'none';
+            }
+        }
+
+        // Call the function for each set of input and levels
+        toggleLevels('skills_have1', 'levels1');
+        toggleLevels('skills_have2', 'levels2');
+        toggleLevels('skills_have3', 'levels3');
+        toggleLevels('skills_have4', 'levels4');
+        toggleLevels('skills_have5', 'levels5');
+        toggleLevels('skills_have6', 'levels6');
+        toggleLevels('skills_have7', 'levels7');
+        toggleLevels('skills_have8', 'levels8');
+</script>
+
+</body>
+
+</html>

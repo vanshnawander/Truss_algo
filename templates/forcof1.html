@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+        crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choose</title>
+    <style>
+        .gradient-custom {
+            /* fallback for old browsers */
+            background: #3BB4FD;
+    
+            /* Chrome 10-25, Safari 5.1-6 */
+            background: -webkit-linear-gradient(to right, #3BB4FD, #4581FF);
+    
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            background: linear-gradient(to bottom right, #3BB4FD, #4581FF)
+        }
+    
+
+        #gif{
+				border: 4px solid #fede03 ;
+				border-radius: 5vh;
+                margin-right: 5vh;
+                
+
+				
+				font-size: 1rem;
+				
+				
+			}
+		 .card-registration .select-input.form-control[readonly]:not([disabled]) {
+            font-size: 1rem;
+            line-height: 2.15;
+            padding-left: .75em;
+            padding-right: .75em;
+        }
+
+        .card-registration .select-arrow {
+            top: 13px;
+        }
+    </style>
+</head>
+<body class="gradient-custom vh-100">
+    <img src="static/truss_logo.png" width="15%" style="float: left; position: absolute;">
+ 
+        <div class="container text-center mb-4 py-5" >
+            <h1>Which one are You ?</h1> <br>
+        </div>
+            <div class="container mx-auto">
+                <form id="form" action="php/signup.php" method="post">
+                    <input type="radio" id="role" name="role" value="None" style="visibility:hidden;" checked/>
+                    <div class="row-md py-3">
+                      <div class="col mb-4" >
+                            <div onclick="submit1(1)">
+                                <div class="card shadow-2-strong card-registration " style="border-radius: 15px; cursor:pointer;" >
+                        <div class="card-body p-3 p-md-4">
+                                    
+                                    <h3>Founder</h3>
+                                    <!--<img src="static/undraw_stand_out_-1-oag.svg" alt="Stand Out Image" style="height:150px ; width:150px;">-->
+                                    <center>
+                                    <p>Have an idea for a startup</p>
+                                    <p>Looking for a Co-Founder.</p>
+                                    </center>
+                                    <button  class="btn btn-warning" style="float:right;" onlick = "submit1(1)">Yes!</button>
+                                </div>
+                            </div>
+                            </div>
+                            
+                        </div>
+                        <div class="col mb-5">
+                            <div onclick="submit1(2)">
+                               
+                                    <div class="card shadow-2-strong card-registration " style="border-radius: 15px;  cursor:pointer" >
+                                        <div class="card-body p-3 p-md-4">
+                                            <h3>Co-Founder</h3>
+                                    <!--<img src="static/undraw_team_spirit_re_yl1v.svg" alt="Stand Out Image" style="height:150px; width:150px;">-->
+                              <center>
+                                    <p>Have skills to work for a startup</p>
+                                
+                                    <p>Looking for a Startup Founder</p>
+                                    </center>
+                                     <button  class="btn btn-warning" style="float:right;" onlick = "submit1(2)">Yes!</button>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                     
+                        </div>
+                    <input class="form-check-input" type="radio" name="submitter" value="signup4" style="visibility:hidden;" checked/>
+                </form>
+                
+            </div>
+ <script>
+//      function Founder() {
+//         $.ajax({
+//             url: "php/signup.php",
+//             type: "POST",
+//             data: { role:'Founder',submitter:'signup4'},
+//             success: function(response) {
+//                 if (response == "success") {
+//                     alert("Record updated successfully!");
+//                 } else {
+//                     alert("There was an error updating the record.");
+//                 }
+//             }
+//         });
+//     }
+//     function CoFounder() {
+//         $.ajax({
+//             url: "php/signup.php",
+//             type: "POST",
+//             data: { role:'Co-founder',submitter:'signup4'},
+//             success: function(response) {
+//                 if (response == "success") {
+//                     alert("Record updated successfully!");
+//                 } else {
+//                     alert("There was an error updating the record.");
+//                 }
+//             }
+//         });
+//     }
+
+     function submit1(role) {
+         if(role === 1){
+              document.getElementById("role").value = "Founder";
+         }
+         if(role === 2){
+              document.getElementById("role").value = "CoFounder";
+         }
+       
+        let form = document.getElementById("form");
+        form.submit();
+        // alert("Data stored in database!");
+    }
+    // function toggle(){
+    //     document.getElementById("role").value = "CoFounder";
+    //     let form = document.getElementById("form");
+    //     form.submit();
+    //     alert("Data stored in database!");
+        
+    // }
+ </script>
+</body>
+</html>
