@@ -5,8 +5,7 @@ from scipy import spatial
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 try:
-    connection = pymysql.connect(host='localhost',user='root',password='root',db='sra',autocommit=True)
-    print("database connected")
+     connection=pymysql.connect(host="truss.clwk1t6znrss.ap-south-1.rds.amazonaws.com",user='admin',password='axtrixninjastar321',db='truss', autocommit=True)
 except Exception as e:
     print("database failed to connect")
     print("error : ",e)
@@ -29,7 +28,7 @@ def spacy_tokenizer(doc):
   return [t.text for t in nlp(doc) if not t.is_punct]
 
 def mlalgo(email):
-    df = pd.read_sql(sql="SELECT * FROM truss_user_data", con=connection)  
+    df = pd.read_sql(sql="SELECT * FROM truss_data", con=connection)  
     df=df.dropna(subset=["email"])
     print(df.index)
     ans=pd.DataFrame()
@@ -44,8 +43,8 @@ def mlalgo(email):
     new_bow = vectorizer.transform(new_sentences)
     similarities = cosine_similarity(new_bow, bow)
     for i, new_sentence in enumerate(new_sentences):
-        most_similar_indices = similarities[i].argsort()[::-1][:20]  
-    return df.loc[list(most_similar_indices)]
+        most_similar_indices = similarities[i].argsort()[::-1][:5]  
+    return (df.loc[list(most_similar_indices)]).to_dict(orient='records')
 
 
 
