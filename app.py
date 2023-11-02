@@ -69,6 +69,7 @@ def profile():
 	profileData=request.form['result']
 	print(profileData)
 	data=cursor.execute(f"select * from truss_data where email='{profileData}'")
+	data=cursor.fetchone()
 	return render_template('otherProfile.html')
 
 @app.route('/profile1', methods=["POST", "GET"])
