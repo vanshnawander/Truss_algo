@@ -429,7 +429,10 @@
             <img src="static/edit.png" width="5%" style="padding-right:1.5%;float:right;cursor:pointer" onclick="">
             <br>
             <center>
-                <button class="btn">CONNECT</button>
+                <form action="/user_interaction" method="post">
+                    <input type="email" name="result" id="result" value="{{data[1]}}" hidden>
+                    <input type="submit" class='btn' style='color: black;' value="Connect">
+                  </form>
             </center>
             
         </div>

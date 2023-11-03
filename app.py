@@ -53,9 +53,7 @@ def login():
 #After login for now
 @app.route('/dashboard', methods=["POST", "GET"])
 def dashboard():
-	# LoginData = request.form['result']
-	# print(data)
-	# return render_template('afterLogIn.html',data=data)  , data=data
+
 	print(session['email'])
 	users=mlalgo(session['email'])
 	users = [d for d in users if d.get('email') != session['email']]
@@ -70,7 +68,7 @@ def profile():
 	print(profileData)
 	data=cursor.execute(f"select * from truss_data where email='{profileData}'")
 	data=cursor.fetchone()
-	return render_template('otherProfile.html')
+	return render_template('otherProfile.html',data=data)
 
 @app.route('/profile1', methods=["POST", "GET"])
 def profile1():
@@ -78,8 +76,29 @@ def profile1():
 	print(profileData)
 	data=cursor.execute(f"select * from truss_data where email='{profileData}'")
 	data=cursor.fetchone()
-	print(data)
 	return render_template('otherProfile.html',data=data)
+
+
+@app.route('/user_interaction', methods=["POST", "GET"])
+def user_interaction():
+	selected_option=request.form['result']
+	logged_user=session['email']
+	cursor.execute(f"select user_interaction from truss_data where email='{session['email']}'")
+	ans = cursor.fetchone()[0]
+	cursor.execute(f"select skill_1,skill_2,skill_3 from truss_data where email='{selected_option}'")
+	skills=cursor.fetchone()
+	print(skills)
+	l=[]
+	if ans is not  None:
+		l=ans.split(",")
+	for i in skills:
+		l.insert(0,i)
+	l=l[:50]
+	l=', '.join(l)
+	query=f"update truss_data set user_interaction='{l}' where email='{logged_user}'"
+	cursor.execute(query)
+	return "data inserted"
+
 
 #Sign Up Page
 @app.route('/signup1')
