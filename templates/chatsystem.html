@@ -19,22 +19,30 @@
 
     <script>
         var counter = 0;
+        var no_of_users = 0;
+        var receiver_mail = "";
         $(document).ready(function () {
             $.ajax({
-                url: 'https://busy-erin-sea-urchin-sock.cyclic.app/users',
+                url: 'https://creepy-hen-umbrella.cyclic.app/users',
                 method: 'GET',
                 dataType: 'json',
                 success: function (data) {
+                    no_of_users = data.length;
+                    for(var i=0; i<no_of_users; i++){
+                        var newDiv = $('.message_box').first().clone();
+                        newDiv.attr('data-chat', i);
+                        $(".message_container").append(newDiv);
+                    }
                     $.each(data, function (index, item) {
-
                         var contactDiv = $('.contact').first().clone();
                         contactDiv.removeClass("hidden");
                         contactDiv.find('.firstname').text(item.name);
                         contactDiv.attr("data-chat", counter);
                         console.log(counter);
-                        counter =  counter + 1;
+                        counter = counter + 1;
                         contactDiv.find('.message_time').text(item.time); // Use the actual time data from the API
                         contactDiv.find('.sentence').text(item.message); // Use the actual message data from the API
+                        contactDiv.find('.email').text(item.email);
                         $('.contact').parent().append(contactDiv);
                     });
                 },
@@ -43,6 +51,73 @@
                 }
             });
         });
+
+        function handleClick(event) {
+            var t = "";
+             $(".type_here").val("");
+            console.log(event.currentTarget);
+            var talk = $(event.currentTarget).attr("data-chat");
+            console.log(talk);
+
+// ???????????????????????????????????????????????????????????????????????????????????????
+            var senderId = document.getElementById("data").innerHTML;
+// ??????????????????????????????????????????????????????????????????????????????????????????
+            var receiverId = $(event.currentTarget).find(".email").text();
+            console.log(receiverId); 
+            var requestData = {
+                "senderId" : senderId,
+                "receiverId" : receiverId
+            }
+
+
+            $.ajax({
+                url: 'https://creepy-hen-umbrella.cyclic.app/getmessages',
+                method: 'POST',
+                data: JSON.stringify(requestData),
+                dataType: 'json',
+                contentType: 'application/json',
+                success: function(data){
+                    console.log(data);
+                    console.log("length",data.length);
+                    
+                    $('.message_box[data-chat="' + talk + '"]').empty();
+                    $.each(data, function(index, item){
+                        var messageDiv = $('.message').first().clone();
+                        messageDiv.removeClass("hidden");
+                        messageDiv.find('.text').text(item.message);
+                        t = item.time;
+                        t = t.slice(0,5);
+                        console.log("inner:",t);
+                        $(".header-title").children(".name").find(".message_time").text(t);
+                        messageDiv.find(".time").text(t);
+                        $('.message_box[data-chat="' + talk + '"]').append(messageDiv);
+                        if(item.sender == senderId){
+                            messageDiv.addClass("grey");
+                        }
+                    })
+                    var photo = $(event.currentTarget).find("img").attr("src");
+                    $(".header-middle-img").children("img").attr("src",photo);
+
+
+                },
+                error: function(error){
+                    console.log("Error fetching data from the API: " + error);
+                }
+            })
+
+            
+            var talk = $(event.currentTarget).attr("data-chat");
+            var talkscreen = $('.message_box[data-chat="' + talk + '"]');
+            $(".message_box").removeClass("active");
+            $(".contact").removeClass("active");
+            talkscreen.addClass("active");
+            $(event.currentTarget).addClass("active");
+            var name = $(".contact.active").find(".firstname").text();
+            $(".header-title").children(".name").find(".firstname").text(name);
+            var photo = $(event.currentTarget).find("img").attr("src");
+            $(".header-middle-img").children("img").attr("src", photo)
+
+        }
     </script>
 
     <style>
@@ -167,7 +242,7 @@
             align-items: center;
         }
 
-        .hidden{
+        .hidden {
             visibility: hidden;
         }
 
@@ -1159,9 +1234,9 @@
                 <!-- start of container_left -->
                 <div class="container-left">
 
-                    <div class="chat-list" id = "chat-list">
-                       
-                        <div onclick = "handleClick(event)" class="contact hidden " data-chat="-1">
+                    <div class="chat-list" id="chat-list">
+
+                        <div onclick="handleClick(event)" class="contact hidden " data-chat="-1">
                             <div class="inner-contact-1">
                                 <img src="static/default.png" alt="openchat">
                             </div>
@@ -1173,6 +1248,7 @@
                                 <div class="inner-name-2">
                                     <small class="sentence">message</small>
                                 </div>
+                                <span class="email hidden">email</span>
                             </div>
                         </div>
                     </div>
@@ -1207,462 +1283,164 @@
                 <!-- message_container -->
                 <div class="message_container">
 
-                        <!-- message_box -->
-                        <div class="message_box active"  data-chat="0">
+                    <!-- message_box -->
+                    <div  class="message_box active " data-chat="-1" >
 
-                            <div class="message white">
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore, recusandae.</p>
-                                <h6>05:15</h6><i class="fas fa-chevron-down"></i>
-                                <div class="message_dropdown">
-                                    <div class="message_options">
-                                        <div class="message_info">Info</div>
-                                        <div class="message_delete">Delete</div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="message grey">
-                            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis, minima.</p>
-                            <h6>05:30</h6><i class="fas fa-chevron-down"></i>
+                        <div class="message white hidden">
+                            <p class="text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore, recusandae.</p>
+                            <h6 class="message_time">05:15</h6><i class="fas fa-chevron-down"></i>
                             <div class="message_dropdown">
                                 <div class="message_options">
-                                <div class="message_info">Info</div>
-                                <div class="message_delete">Delete</div>
-                                </div>
-                            </div>
-                            </div>
-
-                        </div>
-                        <!-- end of message_box -->
-
-
-                        <div class="message_box" data-chat="1">
-            
-                            <div class="message white">
-                                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis, minima.</p>
-                                <h6>05:15</h6><i class="fas fa-chevron-down"></i>
-                                <div class="message_dropdown">
-                                    <div class="message_options">
                                     <div class="message_info">Info</div>
                                     <div class="message_delete">Delete</div>
-                                    </div>
                                 </div>
                             </div>
-            
-                            <div class="message grey">
-                                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Numquam, sint.</p>
-                                <h6>05:30</h6><i class="fas fa-chevron-down"></i>
-                                <div class="message_dropdown">
-                                    <div class="message_options">
-                                    <div class="message_info">Info</div>
-                                    <div class="message_delete">Delete</div>
-                                    </div>
-                                </div>
-                            </div>
-            
                         </div>
-          
-          
-                      <div class="message_box" data-chat="2">
-          
-                        <div class="message white">
-                          <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Numquam, sint.</p>
-                          <h6>05:15</h6><i class="fas fa-chevron-down"></i>
-                          <div class="message_dropdown">
-                            <div class="message_options">
-                              <div class="message_info">Info</div>
-                              <div class="message_delete">Delete</div>
-                            </div>
-                          </div>
-                        </div>
-          
-                        <div class="message grey">
-                          <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Incidunt, consequatur?</p>
-                          <h6>05:30</h6><i class="fas fa-chevron-down"></i>
-                          <div class="message_dropdown">
-                            <div class="message_options">
-                              <div class="message_info">Info</div>
-                              <div class="message_delete">Delete</div>
-                            </div>
-                          </div>
-                        </div>
-          
-          
-                      </div>
-          
-          
-                      <div class="message_box" data-chat="3">
-          
-                        <div class="message white">
-                          <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Incidunt, consequatur?</p>
-                          <h6>05:15</h6><i class="fas fa-chevron-down"></i>
-                          <div class="message_dropdown">
-                            <div class="message_options">
-                              <div class="message_info">Info</div>
-                              <div class="message_delete">Delete</div>
-                            </div>
-                          </div>
-                        </div>
-          
-                        <div class="message grey">
-                          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia, facere.</p>
-                          <h6>05:30</h6><i class="fas fa-chevron-down"></i>
-                          <div class="message_dropdown">
-                            <div class="message_options">
-                              <div class="message_info">Info</div>
-                              <div class="message_delete">Delete</div>
-                            </div>
-                          </div>
-                        </div>
-          
-          
-                      </div>
-          
-          
-          
-                      <div class="message_box" data-chat="4">
-          
-                        <div class="message white">
-                          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit, doloribus.</p>
-                          <h6>05:15</h6><i class="fas fa-chevron-down"></i>
-                          <div class="message_dropdown">
-                            <div class="message_options">
-                              <div class="message_info">Info</div>
-                              <div class="message_delete">Delete</div>
-                            </div>
-                          </div>
-                        </div>
-          
-                        <div class="message grey">
-                          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit, doloribus.</p>
-                          <h6>05:30</h6><i class="fas fa-chevron-down"></i>
-                          <div class="message_dropdown">
-                            <div class="message_options">
-                              <div class="message_info">Info</div>
-                              <div class="message_delete">Delete</div>
-                            </div>
-                          </div>
-                        </div>
-          
-          
-                      </div>
-          
-          
-                      <div class="message_box" data-chat="5">
-          
-                        <div class="message white">
-                          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi, deleniti.</p>
-                          <h6>05:15</h6><i class="fas fa-chevron-down"></i>
-                          <div class="message_dropdown">
-                            <div class="message_options">
-                              <div class="message_info">Info</div>
-                              <div class="message_delete">Delete</div>
-                            </div>
-                          </div>
-                        </div>
-          
-                        <div class="message grey">
-                          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi, deleniti.</p>
-                          <h6>05:30</h6><i class="fas fa-chevron-down"></i>
-                          <div class="message_dropdown">
-                            <div class="message_options">
-                              <div class="message_info">Info</div>
-                              <div class="message_delete">Delete</div>
-                            </div>
-                          </div>
-                        </div>
-          
-          
-                      </div>
-          
-                      <div class="message_box" data-chat="6">
-          
-                        <div class="message white">
-                          <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officiis, illo.</p>
-                          <h6>05:15</h6><i class="fas fa-chevron-down"></i>
-                          <div class="message_dropdown">
-                            <div class="message_options">
-                              <div class="message_info">Info</div>
-                              <div class="message_delete">Delete</div>
-                            </div>
-                          </div>
-                        </div>
-          
-                        <div class="message grey">
-                          <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officiis, illo.</p>
-                          <h6>05:30</h6><i class="fas fa-chevron-down"></i>
-                          <div class="message_dropdown">
-                            <div class="message_options">
-                              <div class="message_info">Info</div>
-                              <div class="message_delete">Delete</div>
-                            </div>
-                          </div>
-                        </div>
-          
-          
-                      </div>
-          
-          
-                      <div class="message_box" data-chat="7">
-                        <div class="message white">
-                          <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quam, dolore.</p>
-                          <h6>05:15</h6><i class="fas fa-chevron-down"></i>
-                          <div class="message_dropdown">
-                            <div class="message_options">
-                              <div class="message_info">Info</div>
-                              <div class="message_delete">Delete</div>
-                            </div>
-                          </div>
-                        </div>
-          
-                        <div class="message grey">
-                          <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quam, dolore.</p>
-                          <h6>05:30</h6><i class="fas fa-chevron-down"></i>
-                          <div class="message_dropdown">
-                            <div class="message_options">
-                              <div class="message_info">Info</div>
-                              <div class="message_delete">Delete</div>
-                            </div>
-                          </div>
-                        </div>
-          
-                      </div>
-                      <div class="message_box" data-chat="8">
-                        <div class="message white">
-                          <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quam, dolore.</p>
-                          <h6>05:15</h6><i class="fas fa-chevron-down"></i>
-                          <div class="message_dropdown">
-                            <div class="message_options">
-                              <div class="message_info">Info</div>
-                              <div class="message_delete">Delete</div>
-                            </div>
-                          </div>
-                        </div>
-          
-                        <div class="message grey">
-                          <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quam, dolore.</p>
-                          <h6>05:30</h6><i class="fas fa-chevron-down"></i>
-                          <div class="message_dropdown">
-                            <div class="message_options">
-                              <div class="message_info">Info</div>
-                              <div class="message_delete">Delete</div>
-                            </div>
-                          </div>
-                        </div>
-          
-                      </div>
-                      <div class="message_box" data-chat="9">
-                        <div class="message white">
-                          <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quam, dolore.</p>
-                          <h6>05:15</h6><i class="fas fa-chevron-down"></i>
-                          <div class="message_dropdown">
-                            <div class="message_options">
-                              <div class="message_info">Info</div>
-                              <div class="message_delete">Delete</div>
-                            </div>
-                          </div>
-                        </div>
-          
-                        <div class="message grey">
-                          <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quam, dolore.</p>
-                          <h6>05:30</h6><i class="fas fa-chevron-down"></i>
-                          <div class="message_dropdown">
-                            <div class="message_options">
-                              <div class="message_info">Info</div>
-                              <div class="message_delete">Delete</div>
-                            </div>
-                          </div>
-                        </div>
-          
-                      </div>
-                      <div class="message_box" data-chat="10">
-                        <div class="message white">
-                          <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quam, dolore.</p>
-                          <h6>05:15</h6><i class="fas fa-chevron-down"></i>
-                          <div class="message_dropdown">
-                            <div class="message_options">
-                              <div class="message_info">Info</div>
-                              <div class="message_delete">Delete</div>
-                            </div>
-                          </div>
-                        </div>
-          
-                        <div class="message grey">
-                          <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quam, dolore.</p>
-                          <h6>05:30</h6><i class="fas fa-chevron-down"></i>
-                          <div class="message_dropdown">
-                            <div class="message_options">
-                              <div class="message_info">Info</div>
-                              <div class="message_delete">Delete</div>
-                            </div>
-                          </div>
-                        </div>
-          
-                      </div>
-                      <div class="message_box" data-chat="11">
-                        <div class="message white">
-                          <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quam, dolore.</p>
-                          <h6>05:15</h6><i class="fas fa-chevron-down"></i>
-                          <div class="message_dropdown">
-                            <div class="message_options">
-                              <div class="message_info">Info</div>
-                              <div class="message_delete">Delete</div>
-                            </div>
-                          </div>
-                        </div>
-          
-                        <div class="message grey">
-                          <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quam, dolore.</p>
-                          <h6>05:30</h6><i class="fas fa-chevron-down"></i>
-                          <div class="message_dropdown">
-                            <div class="message_options">
-                              <div class="message_info">Info</div>
-                              <div class="message_delete">Delete</div>
-                            </div>
-                          </div>
-                        </div>
-          
-                      </div>
+                    </div>
 
-                    </div>
-                    <!-- end of message_container -->
-                    <div class="type-message-container">
-                        <!-- type_message -->
-                        <div class="type_message">
-                            <div>
-                                <i class="fas fa-smile"></i>
-                                <input class="type_here" type="text" id="message-body" placeholder="Type your message">
-                            </div>
-                            <div>
-                                <!-- <i class="fas fa-paper-plane"></i>
-                            <i class="fas fa-microphone"></i> -->
-                                <button onclick="buttonClick()" type="button" id="send"
-                                    class="btn btn-success">SEND</button>
-                            </div>
-                        </div>
-                        <!-- end of type_message -->
-                    </div>
                 </div>
-
-                <div class="template">
-                    <div class="message grey">
-                        <p class="content">Something new</p>
-                        <h6 class="message_time">5:55</h6>
-                        <i class="fas fa-chevron-down"></i>
-                        <div class="message_dropdown">
-                            <div class="message_options">
-                                <div class="message_info">Info</div>
-                                <div class="message_delete">Delete</div>
-                            </div>
+                <!-- end of message_container -->
+                <p id="data" hidden>{{data}}</p>
+                <div class="type-message-container">
+                    <!-- type_message -->
+                    <div class="type_message">
+                        <div>
+                            <i class="fas fa-smile"></i>
+                            <input class="type_here" type="text" id="message-body" placeholder="Type your message">
+                        </div>
+                        <div>
+                            <i class="fas fa-paper-plane"></i>
+                            <i class="fas fa-microphone"></i>
+                            <!-- <button onclick="buttonClick()" type="button" id="send"
+                                class="btn btn-success">SEND</button> -->
                         </div>
                     </div>
+                    <!-- end of type_message -->
                 </div>
-
             </div>
+
         </div>
+    </div>
 
-        <script src="index.js" charset="utf-8"></script>
-        <script>
+    <script src="index.js" charset="utf-8"></script>
+    <script>
+        const currentDateTime = new Date();
 
-            function handleClick(event){
-                console.log(event.currentTarget);
-                var talk = $(event.currentTarget).attr("data-chat");
-                console.log(talk);
-                var talkscreen = $('.message_box[data-chat="' + talk + '"]');
-                $(".message_box").removeClass("active");
-                $(".contact").removeClass("active");
-                talkscreen.addClass("active");
-                $(event.currentTarget).addClass("active");
-                var name = $(".contact.active").find(".firstname").text();
-                $(".header-title").children(".name").find(".firstname").text(name);
-                var photo = $(event.currentTarget).find("img").attr("src");
-                $(".header-middle-img").children("img").attr("src", photo)
-            }
+        // Get the current date in ISO string format (e.g., "2023-10-31T15:25:30.000Z")
+        const currentDate = currentDateTime.toISOString();
 
-            $(function () {
+        // Get the current date in a specific format (e.g., "2023-10-31")
+        const formattedDate = currentDateTime.toISOString().split('T')[0];
 
-                // $(".left-nav-item-2-1").click(function(){
-                //   let element = $(".parent-container-left");
-                //   element.toggleClass("open-height");
-                //   let element1 = $(".container-left");
-                //   element1.toggleClass("open-height-inner");
-                // })
+        // Get the current time in a specific format (e.g., "15:25:30")
+        const formattedTime = currentDateTime.toTimeString().split(' ')[0];
+        var typped_message = "";
+// ????????????????????????????????????????????????????????????????????????????????????????
+        var senderId = document.getElementById("data").innerHTML;
+// ???????????????????????????????????????????????????????????????????????????????????????
+        var receiverId = "";
 
-                $(".fa-paper-plane").click(function () {
-                    var text = $(".type_here").val();
-                    if (text) {
-                        var new_text = $(".template .message").clone();
-                        new_text.children(".content").text(text);
-                        new_text.children(".message_time").text(current_time());
-                        $(".message_box.active").append(new_text);
-                        $(".message_box").scrollTop(10000);
-                    };
-                    $(".type_here").val("");
+            $(".fa-paper-plane").click(function () {
+                var text = $(".type_here").val();
+                if (text) {
+                    console.log(text);
+                    var new_text = $(".message").first().clone();
+                    new_text.find(".text").text(text);
+                    typped_message = text;
+                    receiverId = $(".contact.active").find(".email").text();
+                    console.log(receiverId);
+                    new_text.removeClass("hidden");
+                    new_text.removeClass("white");
+                    new_text.addClass("grey");
+                    new_text.find(".message_time").text(formattedTime.slice(0,5));
+                    $(".message_box.active").append(new_text);
+                    $(".message_box").scrollTop(10000);
 
-                    setTimeout(function () {
-                        var new_text = $(".template .message").clone();
-                        new_text.toggleClass("grey white");
-                        new_text.children(".content").text("Hi! Welcome to chat section.");
-                        new_text.children(".message_time").text(current_time());
-                        $(".message_box.active").append(new_text);
-                        $(".header-middle").find(".message_time").text(current_time());
-                        $(".chat_list").children(".contact.active").find(".sentence").text("Hi! Welcome to chat section.").css("color", "black").css("font-weight", "Bold");
-                        $(".chat_list").children(".contact.active").find(".message_time").text(current_time());
-                        $(".message_box").scrollTop(10000);
-                    }, 1000);
+                    // new_text.children(".content").text(text);
+                    // new_text.children(".message_time").text(current_time());
+                    // $(".message_box.active").append(new_text);
+                    // $(".message_box").scrollTop(10000);
+                };
+                $(".type_here").val("");
 
-                });
+                var requestData = {
+                    "senderId" : senderId,
+                    "recipientId": receiverId,
+                    "text" : typped_message
+                }
 
-                $(".type_here").keypress(function (e) {
-                    var key = e.which;
-                    if (key == 13) {
-                        $(".fa-paper-plane").click();
-                        return false;
+                $.ajax({
+                url: 'https://creepy-hen-umbrella.cyclic.app/message',
+                method: 'POST',
+                data: JSON.stringify(requestData),
+                dataType: 'json',
+                contentType: 'application/json',
+                success: function(){
+                    // console.log(data);
+                    console.log("sucessfully sent");
+                    handleClick();
+
+                },
+                error: function(error){
+                    console.log("Error fetching data from the API: " + error);
+                }
+            })
+
+            });
+
+
+
+        $(function () {
+            $(".type_here").keypress(function (e) {
+                var key = e.which;
+                if (key == 13) {
+                    $(".fa-paper-plane").click();
+                    return false;
+                }
+            });
+
+            $(".searchme").keyup(function () {
+                var lookup = $(this).val().toLowerCase();
+                $(".contact").each(function () {
+                    if ($(this).find(".firstname").text().toLowerCase().includes(lookup)) {
+                        $(this).show();
+                    } else {
+                        $(this).hide();
                     }
-                });
-
-                $(".searchme").keyup(function () {
-                    var lookup = $(this).val().toLowerCase();
-                    $(".contact").each(function () {
-                        if ($(this).find(".firstname").text().toLowerCase().includes(lookup)) {
-                            $(this).show();
-                        } else {
-                            $(this).hide();
-                        }
-                    });
-                });
-
-                $(document).on("click", ".message i", function () {
-                    $(this).parent(".message").find(".message_options").toggleClass("active");
-                });
-
-                $(document).on("click", ".message_delete", function () {
-                    $(this).closest(".message").hide();
                 });
             });
 
-            function current_time() {
-                var d = new Date();
-                var m = d.getMinutes();
-                var h = d.getHours();
+            $(document).on("click", ".message i", function () {
+                $(this).parent(".message").find(".message_options").toggleClass("active");
+            });
 
-                if (m < 10) {
-                    m = "0" + m;
-                };
-                if (h < 10) {
-                    h = "0" + h;
-                }
-                return h + ":" + m;
-            };
+            $(document).on("click", ".message_delete", function () {
+                $(this).closest(".message").hide();
+            });
+        });
 
-        </script>
+        // function current_time() {
+        //     var d = new Date();
+        //     var m = d.getMinutes();
+        //     var h = d.getHours();
+
+        //     if (m < 10) {
+        //         m = "0" + m;
+        //     };
+        //     if (h < 10) {
+        //         h = "0" + h;
+        //     }
+        //     return h + ":" + m;
+        // };
+
+    </script>
 <script>
     const menuToggle = document.querySelector('.menu-toggle');
     const navigation = document.querySelector('.navigation');
     menuToggle.onclick = () => {
         navigation.classList.toggle('open');
     }
-
+    
     const listItems = document.querySelectorAll('.list-item');
     listItems.forEach(item => {
         item.onclick = () => {
@@ -1674,11 +1452,11 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
     integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
     crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js"
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js"
     integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk"
     crossorigin="anonymous"></script>
 
+
     
 </body>
-
 </html>

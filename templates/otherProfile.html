@@ -431,9 +431,36 @@
             <center>
                 <form action="/user_interaction" method="post">
                     <input type="email" name="result" id="result" value="{{data[1]}}" hidden>
-                    <input type="submit" class='btn' style='color: black;' value="Connect">
+                    <input type="submit" class='btn' style='color: black;' value="Connect" onclick="connect()">
                   </form>
             </center>
+            
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js">
+    
+            </script>
+            <script>
+                function connect() {
+                    var email = {{data[1]}};
+                    var name={{data[2] }};
+                    console.log(email);
+                    console.log(1234);
+                    var new_user = {'email': email, 'name':name}
+                    $.ajax({
+                        url: 'https://creepy-hen-umbrella.cyclic.app/user',
+                        method: 'POST',
+                        data: JSON.stringify(new_user),
+                        dataType: 'json',
+                        contentType: 'application/json',
+                        success: function(response) {
+                            console.log(response);
+                        },
+                        error: function(xhr, textStatus, errorThrown) {
+                            console.error('Error:', errorThrown);
+                        }
+                    });
+                    
+                }
+            </script>
             
         </div>
     </div>

@@ -271,7 +271,7 @@ def view_friend_requests():
     
 @app.route('/chat')
 def chat():
-	return render_template('chatsystem.html')
+	return render_template('chatsystem.html',data=session['email'])
 
 #Finder Page
 # @app.route('/chat',methods = ['POST', 'GET'])
