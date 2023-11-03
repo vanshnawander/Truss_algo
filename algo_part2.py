@@ -33,8 +33,8 @@ def mlalgo(email):
     print(df.index)
     ans=pd.DataFrame()
     ans["email"] = df["email"]
-    ans["tags"]=df["gender"]+" "+ df["residence"] +" "+ df["focused industry"]+" "+ df["skill_1"].apply(convert)+ " "+df["skill_2"].apply(convert)+" "+df["skill_3"].apply(convert)
-    ans["skills_required"]=df["skills_required"].apply(func) +" "+ df["residence"]+" "+df["gender"]+" " + df["user_interaction"].apply(func)
+    ans["tags"]=df["gender"]+" "+  df["focused industry"]+" "+ df["skill_1"].apply(convert)+ " "+df["skill_2"].apply(convert)+" "+df["skill_3"].apply(convert)
+    ans["skills_required"]=df["skills_required"].apply(func) +" "+" "+df["gender"]+" " + df["user_interaction"].apply(func)
     ans.fillna("",inplace=True)
     corpus=list(ans['tags'])
     vectorizer = CountVectorizer(tokenizer=spacy_tokenizer, lowercase=False, binary=True)

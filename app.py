@@ -97,20 +97,34 @@ def user_interaction():
 	l=', '.join(l)
 	query=f"update truss_data set user_interaction='{l}' where email='{logged_user}'"
 	cursor.execute(query)
-	return "data inserted"
-
+	return redirect(url_for('dashboard'))
 
 #Sign Up Page
-@app.route('/signup1')
+@app.route('/signup1', methods=['POST', 'GET'])
 def signup1():
-    # if request.method=='POST':
-    #     email=request.form.get('emailAddress')
-    #     return redirect(url_for('signup2',email=email))
-    return render_template('signup.html')
+	if request.method == 'POST':
+		email = request.form.get('emailAddress')
+		session['email'] = email
+		firstName = request.form.get('firstName')
+		lastName = request.form.get('lastName')
+		gender = request.form.get('inlineRadioOptions')
+
+		full_name = f"{firstName} {lastName}"
+
+		cursor.execute(f"INSERT INTO `truss_data` (`name`, `gender`, `email`) VALUES ('{full_name}', '{gender}', '{email}')")
+
+		return redirect(url_for('signup2'))
+
+	return render_template('signup.html')
     
-@app.route('/signup2')
+@app.route('/signup2',methods = ['POST', 'GET'])
 def signup2():
-    # email=request.args.get('email',None)       
+    # email=request.args.get('email',None)
+	if request.method=='POST':
+		email=session['email']
+		return redirect(url_for('signup3'))
+
+		
 	return render_template('setpass.html')
 
 #add signup2 to database
@@ -141,8 +155,18 @@ def upload():
 	return render_template('upload.html')
 	
 #Input Instituon
-@app.route('/signup3')
+@app.route('/signup3',methods = ['POST', 'GET'])
 def signup3():
+	if request.method == 'POST':
+		email=session['email']
+		instituon=request.form.get('institutionName')
+		course=request.form.get('course')
+		specilization=request.form.get('specialization')
+		graduationaYear=request.form.get('year')
+
+		cursor.execute(f"UPDATE `truss_data` SET `education level`='{course}',`specialization`='{specilization}' WHERE `email` = '{email}'")
+
+		return redirect(url_for('signup4'))
 	return render_template('instituion.html')
 
 #add signup3 to database
@@ -166,7 +190,7 @@ def signup3_add():
 
 
 #Input Founder or Co-Founder
-@app.route('/signup4')
+@app.route('/signup4',	methods = ['POST', 'GET'])
 def signup4():
 	return render_template('forcof1.html')
 
@@ -199,25 +223,67 @@ def signupIfCoFounder1():
 		return redirect(url_for('signup1'))
 
 #Input Founder Data
-@app.route('/signup5F')
+@app.route('/signup5F',methods = ['POST', 'GET'])
 def signup5F():
+	if request.method == 'POST':
+		email=session['email']
+		role="Founder"
+		founderPitch=request.form.get('founderPitch')
+		FounderstartPitch=request.form.get('FounderstartPitch')
+		ideaStage=request.form.get('ideaStage')
+		industry=request.form.get('industry')
+
+		cursor.execute(f"UPDATE `truss_data` SET `role_preference`='{role}', `Pitch_Self`='{founderPitch}',`Pitch_idea`='{FounderstartPitch}',`idea_stage`='{ideaStage}',`focused industry`='{industry}' WHERE `email` = '{email}'")
+		return redirect(url_for('signup5F2'))
+		
 	return render_template('founder.html')
 	
 #Input Founder skill Data
-@app.route('/signup5F2')
+@app.route('/signup5F2',methods = ['POST', 'GET'])
 def signup5F2():
+	if request.method == 'POST':
+		email=session['email']
+		skills_have1=request.form.get('skills_have1')
+		skills_have2=request.form.get('skills_have2')
+		skills_have3=request.form.get('skills_have3')
+		skills_have4=request.form.get('skills_have4')
+		skills_required1=request.form.get('skills_required1')
+		skills_required2=request.form.get('skills_required2')
+		skills_required3=request.form.get('skills_required3')
+		skills_required4=request.form.get('skills_required4')
+
+		skills_required = f"{skills_required1}, {skills_required2}, {skills_required3}"
+		cursor.execute(f"UPDATE `truss_data` SET `skill_1`='{skills_have1}',`skill_2`='{skills_have2}',`skill_3`='{skills_have3}',`skills_required`='{skills_required}' WHERE `email` = '{email}'")
+		return redirect(url_for('thankyou'))
 	return render_template('founderSkill.html')
 
 
 
 #Input CoFounder Data
-@app.route('/signup5CF')
+@app.route('/signup5CF',methods = ['POST', 'GET'])
 def signup5CF():
+	if request.method == 'POST':
+		email=session['email']
+		role="Co-Founder"
+		coFounderPitch=request.form.get('coFounderPitch')
+		industry=request.form.get('industry')
+		cursor.execute(f"UPDATE `truss_data` SET `role_preference`='{role}',`Pitch_Self`='{coFounderPitch}',`focused industry`='{industry}' WHERE `email` = '{email}'")
+		return redirect(url_for('signup5CF2'))
+		
 	return render_template('cofounder.html')
 	
 #Input CoFounder skill Data
-@app.route('/signup5CF2')
+@app.route('/signup5CF2',methods = ['POST', 'GET'])
 def signup5CF2():
+	if request.method == 'POST':
+		email=session['email']
+		skills_have1=request.form.get('skills_have1')
+		skills_have2=request.form.get('skills_have2')
+		skills_have3=request.form.get('skills_have3')
+		skills_have4=request.form.get('skills_have4')
+		
+		cursor.execute(f"UPDATE `truss_data` SET `skill_1`='{skills_have1}',`skill_2`='{skills_have2}',`skill_3`='{skills_have3}' WHERE `email` = '{email}'")
+		return redirect(url_for('thankyou'))
 	return render_template('cofounderSkill.html')
 
 
@@ -257,15 +323,6 @@ def send_friend_request():
     db.session.add(request)
     db.session.commit()
     return render_template('requestSent.html')
-    
-    
-#acceptFriendRequest
-@app.route('/view_friend_requests')
-def view_friend_requests():
-    # user_id = session['user_id']
-    user_id = 92
-    requests = FriendRequest.query.filter_by(recipient_id=user_id, status='pending').all()
-    return render_template('notifications.html', requests=requests)
     
     
     

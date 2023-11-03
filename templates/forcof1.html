@@ -54,7 +54,7 @@
             <h1>Which one are You ?</h1> <br>
         </div>
             <div class="container mx-auto">
-                <form id="form" action="php/signup.php" method="post">
+                <form id="form" action="/signup4" method="post">
                     <input type="radio" id="role" name="role" value="None" style="visibility:hidden;" checked/>
                     <div class="row-md py-3">
                       <div class="col mb-4" >
@@ -68,10 +68,16 @@
                                     <p>Have an idea for a startup</p>
                                     <p>Looking for a Co-Founder.</p>
                                     </center>
-                                    <button  class="btn btn-warning" style="float:right;" onlick = "submit1(1)">Yes!</button>
+                                    <button class="btn btn-warning" style="float:right;" ><a href="http://127.0.0.1:5000/signup5F">Yes!</a></button>
                                 </div>
                             </div>
                             </div>
+                            <script>
+                                function done(){
+                                    var targetUrl = '/signup5F'; 
+                                    window.location.href = targetUrl;
+                                }
+                            </script>
                             
                         </div>
                         <div class="col mb-5">
@@ -86,7 +92,7 @@
                                 
                                     <p>Looking for a Startup Founder</p>
                                     </center>
-                                     <button  class="btn btn-warning" style="float:right;" onlick = "submit1(2)">Yes!</button>
+                                     <button  class="btn btn-warning" style="float:right;" onlick = "redirect(url_for('signup5CF'))">Yes!</button>
                                 </div>
                                 </div>
                             </div>
