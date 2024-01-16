@@ -1,0 +1,7 @@
+flask
+sqlite3
+pymysql
+pandas
+spacy
+scikit-learn
+
